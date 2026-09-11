@@ -3,357 +3,113 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Payday AJ — Dallas Artist, Actor, Mogul</title>
-<meta name="description" content="Official-style site concept for Dallas artist Payday AJ. Debut album BIGGEST PAYDAY EVER, official videos, film work, and booking.">
+<title>PAYDAY AJ</title>
+<meta name="description" content="PAYDAY AJ — Dallas artist, songwriter and actor. Debut album BIGGEST PAYDAY EVER out now. Videos, film work, shows and booking.">
 <link rel="icon" href="assets/avatar.jpg">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="PAYDAY AJ">
 <meta property="og:title" content="PAYDAY AJ — Blessed &amp; Determined">
-<meta property="og:description" content="Debut album BIGGEST PAYDAY EVER out now. Videos, film work, and booking — all in one place.">
-<meta property="og:image" content="https://xbased420.github.io/Payday-Aj-Personal-Brand-Booking-Site/assets/album.jpg">
-<meta property="og:url" content="https://xbased420.github.io/Payday-Aj-Personal-Brand-Booking-Site/">
+<meta property="og:description" content="Ouuu, is it PAYDAY yet? Debut album BIGGEST PAYDAY EVER out now. Videos, film, shows and booking.">
+<meta property="og:image" content="https://xbased420.github.io/PaydayAj/assets/album.jpg">
+<meta property="og:url" content="https://xbased420.github.io/PaydayAj/">
 <meta name="twitter:card" content="summary_large_image">
-</head>
-<body>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
-<style>
-:root{
-  --ink:#0A0C09;
-  --ink-2:#11150F;
-  --ink-3:#181D16;
-  --line:#2A3226;
-  --paper:#EDE7D8;
-  --text:#F3F1E9;
-  --muted:#98A08F;
-  --green:#27A24E;
-  --green-deep:#116B33;
-  --gold:#E0A22B;
-  --red:#C8342B;
-  --shadow:0 24px 60px -28px rgba(0,0,0,.9);
-  --display:"Archivo Black","Arial Black",Impact,sans-serif;
-  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
-  --mono:"Space Mono",ui-monospace,"Courier New",monospace;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--ink);color:var(--text);
-  font-family:var(--body);font-size:16px;line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-::selection{background:var(--gold);color:#0A0C09}
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-
-.wrap{width:min(1180px,92vw);margin-inline:auto}
-
-/* ---------- disclosure ribbon ---------- */
-.ribbon{
-  background:var(--gold);color:#0A0C09;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
-  text-transform:uppercase;
-}
-.ribbon .wrap{display:flex;gap:14px;align-items:center;justify-content:space-between;
-  padding:7px 0;flex-wrap:wrap}
-.ribbon b{font-weight:700}
-
-/* ---------- nav ---------- */
-.nav{position:sticky;top:0;z-index:50;background:rgba(10,12,9,.82);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav .wrap{display:flex;align-items:center;gap:24px;height:62px}
-.brand{display:flex;align-items:center;gap:11px;font-family:var(--display);
-  font-size:15px;letter-spacing:.02em;text-decoration:none;margin-right:auto}
-.brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;
-  border:1.5px solid var(--gold)}
-.navlinks{display:flex;gap:22px;font-size:13px;letter-spacing:.04em;
-  text-transform:uppercase;font-weight:600}
-.navlinks a{color:var(--muted);text-decoration:none;transition:color .18s}
-.navlinks a:hover{color:var(--gold)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);
-  font-weight:700;font-size:13.5px;letter-spacing:.03em;text-transform:uppercase;
-  padding:11px 18px;text-decoration:none;border:0;cursor:pointer;
-  background:var(--green);color:#04160A;transition:transform .16s, background .16s}
-.btn:hover{background:#2FBE5C;transform:translateY(-1px)}
-.btn.ghost{background:transparent;color:var(--text);
-  box-shadow:inset 0 0 0 1.5px var(--line)}
-.btn.ghost:hover{background:var(--ink-3);box-shadow:inset 0 0 0 1.5px var(--gold);color:var(--gold)}
-.btn.gold{background:var(--gold);color:#170F02}
-.btn.gold:hover{background:#F0B441}
-@media (max-width:860px){.navlinks{display:none}}
-
-/* ---------- hero ---------- */
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.slip{position:absolute;inset:0;opacity:.5;
-  background-image:
-    linear-gradient(to right,rgba(200,52,43,.10) 1px,transparent 1px),
-    linear-gradient(to bottom,rgba(200,52,43,.10) 1px,transparent 1px);
-  background-size:18px 22px;
-  -webkit-mask-image:radial-gradient(120% 90% at 15% 10%,#000 0%,transparent 70%);
-  mask-image:radial-gradient(120% 90% at 15% 10%,#000 0%,transparent 70%);
-  pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;
-  gap:56px;align-items:center;padding:74px 0 78px}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px}
-.eyebrow::before{content:"";width:26px;height:2px;background:var(--red)}
-h1{font-family:var(--display);margin:18px 0 0;line-height:.86;
-  font-size:clamp(56px,8.4vw,116px);letter-spacing:-.02em;text-wrap:balance}
-h1 .out{color:transparent;-webkit-text-stroke:2px var(--gold)}
-.tagline{font-family:var(--mono);font-size:clamp(15px,1.6vw,19px);color:var(--paper);
-  margin:22px 0 0;letter-spacing:.02em}
-.tagline b{color:var(--green);font-weight:700}
-.rolebar{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.role{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
-  padding:6px 11px;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line)}
-.herocta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-.heroshot{position:relative}
-.heroshot img{width:100%;filter:contrast(1.04) saturate(1.03)}
-.heroshot::after{content:"";position:absolute;inset:10px;
-  box-shadow:inset 0 0 0 1.5px rgba(224,162,43,.55);pointer-events:none}
-.stamp{position:absolute;left:-26px;bottom:26px;background:var(--red);color:#fff;
-  font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.14em;
-  text-transform:uppercase;padding:9px 14px;transform:rotate(-3deg);
-  box-shadow:var(--shadow)}
-@media (max-width:900px){
-  .hero .wrap{grid-template-columns:1fr;gap:36px;padding:48px 0 56px}
-  .heroshot{order:-1}
-  .stamp{left:auto;right:14px;bottom:14px}
-}
-
-/* ---------- perforated divider ---------- */
-.perf{position:relative;height:0;border-top:2px dashed var(--line)}
-.perf::before,.perf::after{content:"";position:absolute;top:-11px;width:20px;height:20px;
-  border-radius:50%;background:var(--ink);box-shadow:inset 0 0 0 2px var(--line)}
-.perf::before{left:-10px}
-.perf::after{right:-10px}
-
-/* ---------- generic section ---------- */
-section{padding:76px 0}
-.sechead{display:flex;align-items:flex-end;justify-content:space-between;
-  gap:24px;flex-wrap:wrap;margin-bottom:34px}
-h2{font-family:var(--display);font-size:clamp(28px,3.6vw,44px);line-height:1;
-  margin:10px 0 0;letter-spacing:-.015em}
-.sub{color:var(--muted);max-width:62ch;margin:12px 0 0;font-size:15.5px}
-
-/* ---------- album ---------- */
-#music{background:var(--ink-2)}
-.album{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:52px;align-items:start}
-.cover{position:relative}
-.cover img{width:100%;box-shadow:var(--shadow)}
-.cover .badge{position:absolute;top:-14px;left:-14px;background:var(--green);
-  color:#04160A;font-family:var(--mono);font-weight:700;font-size:11.5px;
-  letter-spacing:.12em;text-transform:uppercase;padding:8px 12px}
-.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
-  margin-top:22px;border:1px solid var(--line)}
-.meta div{background:var(--ink-2);padding:13px 14px}
-.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);margin:0}
-.meta dd{margin:5px 0 0;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--gold)}
-.tracks{list-style:none;margin:26px 0 0;padding:0;
-  columns:2;column-gap:34px;font-variant-numeric:tabular-nums}
-.tracks li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);
-  break-inside:avoid;font-size:15px}
-.tracks .n{font-family:var(--mono);font-size:12.5px;color:var(--green);
-  min-width:22px;padding-top:2px}
-.tracks .t{font-weight:600;letter-spacing:.01em}
-.tracks li.lead .t{color:var(--gold)}
-.platforms{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
-.plat{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-  padding:9px 13px;text-decoration:none;color:var(--text);
-  box-shadow:inset 0 0 0 1px var(--line);transition:.16s}
-.plat:hover{color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}
-@media (max-width:900px){.album{grid-template-columns:1fr;gap:34px}.tracks{columns:1}}
-@media (max-width:520px){.meta{grid-template-columns:1fr}}
-
-/* ---------- videos ---------- */
-.vgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-@media (max-width:640px){.vgrid{grid-template-columns:1fr}}
-.vid{position:relative;text-decoration:none;display:block;background:var(--ink-3);
-  box-shadow:inset 0 0 0 1px var(--line);transition:.2s}
-.vid:hover{box-shadow:inset 0 0 0 1px var(--gold);transform:translateY(-3px)}
-.vthumb{position:relative;aspect-ratio:16/9;overflow:hidden}
-.vthumb img{width:100%;height:100%;object-fit:cover}
-.play{position:absolute;inset:0;display:grid;place-items:center}
-.play span{width:52px;height:52px;border-radius:50%;background:rgba(10,12,9,.62);
-  box-shadow:inset 0 0 0 1.5px var(--gold);display:grid;place-items:center;
-  transition:.2s}
-.vid:hover .play span{background:var(--gold)}
-.play svg{width:15px;height:15px;fill:var(--gold);transition:.2s;margin-left:2px}
-.vid:hover .play svg{fill:#170F02}
-.vbody{padding:15px 16px 17px}
-.vbody h3{font-family:var(--display);font-size:17px;margin:0;letter-spacing:.01em}
-.vbody p{margin:6px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--muted);
-  letter-spacing:.05em;text-transform:uppercase}
-
-/* ---------- next single ---------- */
-#next{background:var(--ink-2)}
-.next{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:center}
-.next img{width:100%;box-shadow:var(--shadow)}
-.next h2{margin-top:14px}
-.countline{font-family:var(--mono);color:var(--red);font-size:13px;
-  letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-@media (max-width:760px){.next{grid-template-columns:1fr;gap:26px}}
-
-/* ---------- screen / film ---------- */
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
-.film{box-shadow:inset 0 0 0 1px var(--line)}
-.film img{aspect-ratio:16/9;object-fit:cover;width:100%}
-.film .fb{padding:16px}
-.film h3{font-family:var(--display);font-size:18px;margin:0}
-.film .role2{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--green);margin:7px 0 0}
-.film p{margin:9px 0 0;font-size:14.5px;color:var(--muted)}
-
-/* ---------- numbers + press ---------- */
-#numbers{background:var(--ink-2)}
-.numwrap{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
-  border:1px solid var(--line)}
-.stat{background:var(--ink-2);padding:24px}
-.stat .v{font-family:var(--display);font-size:clamp(30px,4.6vw,46px);line-height:1;
-  color:var(--gold);font-variant-numeric:tabular-nums}
-.stat .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);margin-top:9px}
-.press{margin-top:26px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
-.pr{background:var(--ink-2);padding:15px 18px;display:flex;gap:16px;align-items:baseline;
-  flex-wrap:wrap}
-.pr .who{font-weight:700;font-size:15px}
-.pr .what{color:var(--muted);font-size:14px}
-.pr .tag{margin-left:auto;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--green)}
-.wrapped{box-shadow:var(--shadow)}
-.wrapcap{font-family:var(--mono);font-size:11px;color:var(--muted);
-  letter-spacing:.06em;margin-top:10px;text-transform:uppercase}
-@media (max-width:860px){.numwrap{grid-template-columns:1fr;gap:30px}}
-
-/* ---------- about ---------- */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about p{font-size:16.5px;color:#DCD9CE;max-width:60ch}
-.about p + p{margin-top:16px}
-.about .pull{font-family:var(--display);font-size:clamp(22px,2.8vw,32px);line-height:1.12;
-  color:var(--text);margin:0 0 22px;text-wrap:balance}
-.about .pull em{font-style:normal;color:var(--green)}
-.photostack{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.photostack img{width:100%;height:100%;object-fit:cover}
-.photostack .tall{grid-row:span 2}
-@media (max-width:860px){.about{grid-template-columns:1fr;gap:32px}}
-
-/* ---------- booking ---------- */
-#booking{background:var(--ink-2)}
-.bookgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.contactlist{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
-  margin-top:24px}
-.contactlist div{background:var(--ink-2);padding:15px 18px}
-.contactlist dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);margin:0}
-.contactlist dd{margin:5px 0 0;font-size:15px;font-weight:600}
-form{display:grid;gap:14px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
-input,select,textarea{width:100%;background:var(--ink);color:var(--text);
-  border:1px solid var(--line);padding:12px 13px;font-family:var(--body);font-size:15px}
-input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:none}
-textarea{min-height:110px;resize:vertical}
-.formnote{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
-#formmsg{display:none;background:rgba(39,162,78,.12);color:var(--green);
-  box-shadow:inset 0 0 0 1px rgba(39,162,78,.4);padding:12px 14px;
-  font-family:var(--mono);font-size:12.5px}
-@media (max-width:860px){.bookgrid{grid-template-columns:1fr;gap:34px}.row{grid-template-columns:1fr}}
-
-/* ---------- pitch panel ---------- */
-.pitch{background:var(--paper);color:#14170F}
-.pitch .wrap{padding:56px 0}
-.pitch h2{color:#14170F}
-.pitch .sub{color:#4C5343}
-.plist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
-  background:#C9C2B0;border:1px solid #C9C2B0;margin-top:28px}
-.plist div{background:var(--paper);padding:18px}
-.plist h4{font-family:var(--display);font-size:15px;margin:0 0 7px}
-.plist p{margin:0;font-size:14px;color:#4C5343}
-@media (max-width:820px){.plist{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.plist{grid-template-columns:1fr}}
-.pitchfoot{margin-top:26px;font-family:var(--mono);font-size:12.5px;color:#4C5343;
-  letter-spacing:.03em}
-
-/* ---------- footer ---------- */
-footer{padding:48px 0 60px;border-top:1px solid var(--line)}
-.fgrid2{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap;align-items:flex-start}
-.socials{display:flex;gap:9px;flex-wrap:wrap}
-.small{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.9;
-  letter-spacing:.03em;max-width:56ch}
-.small a{color:var(--gold)}
-
-/* ---------- motion ---------- */
-.rise{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
-.rise:nth-child(2){animation-delay:.06s}
-.rise:nth-child(3){animation-delay:.12s}
-@keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto}
-}
-</style>
-
-<div class="ribbon"><div class="wrap">
-  <span><b>Concept mockup</b> &nbsp;·&nbsp; not an official Payday AJ site</span>
-  <span>Built from what's public on @ajpaydaynosleep</span>
-</div></div>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
 <nav class="nav"><div class="wrap">
-  <a class="brand" href="#top"><img src="assets/avatar.jpg" alt="Payday AJ profile">PAYDAY&nbsp;AJ</a>
+  <a class="brand" href="#top"><img src="assets/avatar.jpg" alt="">PAYDAY&nbsp;AJ</a>
   <div class="navlinks">
-    <a href="#music">Music</a>
     <a href="#videos">Videos</a>
-    <a href="#screen">Screen</a>
+    <a href="#music">Music</a>
+    <a href="#screen">Film</a>
     <a href="#about">About</a>
-    <a href="#booking">Booking</a>
+    <a href="#shows">Shows</a>
   </div>
-  <a class="btn" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">Stream the album</a>
+  <a class="btn" href="#booking">Let's work</a>
 </div></nav>
 
 <header class="hero" id="top">
+  <div class="hero-bg">
+    <img src="assets/v-blicca.jpg" alt="PAYDAY AJ in a frame from one of his videos">
+  </div>
   <div class="slip"></div>
   <div class="wrap">
-    <div>
-      <div class="eyebrow rise">Dallas, Texas</div>
-      <h1 class="rise">PAYDAY<br><span class="out">AJ</span></h1>
-      <p class="tagline rise"><b>Blessed &amp; Determined.</b> Artist. Actor. Mogul.</p>
+    <div class="hero-inner">
+      <div class="eyebrow">Dallas, Texas</div>
+      <h1>PAYDAY<br><span class="out">AJ</span></h1>
+      <p class="tagline">“Ouuu, is it PAYDAY yet?”</p>
+      <p class="motto">Blessed &amp; Determined</p>
       <div class="rolebar">
-        <span class="role">Debut album out now</span>
-        <span class="role">13 tracks</span>
-        <span class="role">57 countries</span>
+        <span class="role">Artist</span>
+        <span class="role">Songwriter</span>
+        <span class="role">Actor</span>
+        <span class="role">Entrepreneur</span>
+        <span class="role">Creative Director</span>
       </div>
       <div class="herocta">
-        <a class="btn gold" href="#music">Hear <em style="font-style:normal">BIGGEST PAYDAY EVER</em></a>
-        <a class="btn ghost" href="#booking">Book / Feature</a>
+        <a class="btn" href="#booking">Let's work</a>
+        <a class="btn ghost" href="#videos">Watch the visuals</a>
       </div>
-    </div>
-    <div class="heroshot rise">
-      <img src="assets/hero.jpg" alt="Payday AJ photographed under a graffiti-covered structure in Dallas">
-      <div class="stamp">No Sleep</div>
     </div>
   </div>
 </header>
 
-<section id="music">
+<section id="videos">
+  <div class="wrap">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">Visuals</div>
+        <h2>Official videos</h2>
+        <p class="sub">Every release comes with a visual.</p>
+      </div>
+      <a class="btn ghost" href="https://youtu.be/WJJ4ZXtPwB0" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="vgrid">
+      <a class="vid" href="https://youtu.be/WJJ4ZXtPwB0" target="_blank" rel="noopener">
+        <div class="vthumb"><img src="assets/v-paparazzi.jpg" alt="Still from the PAPARAZZI video">
+          <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
+        <div class="vbody"><h3>PAPARAZZI</h3><p>Official video</p></div>
+      </a>
+      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
+        <div class="vthumb"><img src="assets/v-blicca.jpg" alt="Still from the BLICCA FLO video">
+          <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
+        <div class="vbody"><h3>BLICCA FLO</h3><p>Official video</p></div>
+      </a>
+      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
+        <div class="vthumb"><img src="assets/v-bighomie.jpg" alt="Still from the BIG HOMIE video">
+          <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
+        <div class="vbody"><h3>BIG HOMIE</h3><p>Official video</p></div>
+      </a>
+      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
+        <div class="vthumb"><img src="assets/v-shelike.jpg" alt="Still from the KNOW WHAT SHE LIKE video">
+          <div class="play"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
+        <div class="vbody"><h3>KNOW WHAT SHE LIKE</h3><p>Official video</p></div>
+      </a>
+    </div>
+    <p class="sub" style="margin-top:22px"><span class="todo">Needs from AJ</span> &nbsp;Full video list with direct YouTube links — three of the four above point to Instagram for now.</p>
+  </div>
+</section>
+
+<section id="music" class="alt">
   <div class="wrap">
     <div class="perf"></div>
     <div class="sechead">
       <div>
         <div class="eyebrow">The album</div>
         <h2>BIGGEST PAYDAY EVER</h2>
-        <p class="sub">The debut album as Payday AJ, out since Halloween 2025. Thirteen records that swing from club energy — RIZZ IT UP, CLAP — to melodic ride-out cuts like PRECIOUS and OPP BIH.</p>
+        <p class="sub">The debut album, out since Halloween 2025. Thirteen records that swing from club energy — RIZZ IT UP, CLAP — to melodic ride-out cuts like PRECIOUS and OPP BIH.</p>
       </div>
       <a class="btn gold" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">Play now</a>
     </div>
-
     <div class="album">
       <div>
         <div class="cover">
           <span class="badge">Out now</span>
-          <img src="assets/album.jpg" alt="BIGGEST PAYDAY EVER album cover — hands holding a Texas Powerball ticket">
+          <img src="assets/album.jpg" alt="BIGGEST PAYDAY EVER album cover">
         </div>
         <dl class="meta">
           <div><dt>Released</dt><dd>10.31.25</dd></div>
@@ -364,232 +120,256 @@ footer{padding:48px 0 60px;border-top:1px solid var(--line)}
           <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">Spotify</a>
           <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">Apple Music</a>
           <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">YouTube</a>
-          <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">iTunes</a>
           <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">Deezer</a>
           <a class="plat" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">iHeartRadio</a>
         </div>
       </div>
-
-      <div>
-        <ol class="tracks">
-          <li class="lead"><span class="n">01</span><span class="t">CLAP</span></li>
-          <li><span class="n">02</span><span class="t">ME AND YOU</span></li>
-          <li class="lead"><span class="n">03</span><span class="t">RIZZ IT UP</span></li>
-          <li><span class="n">04</span><span class="t">PRECIOUS</span></li>
-          <li><span class="n">05</span><span class="t">BIG ONE (WALK)</span></li>
-          <li><span class="n">06</span><span class="t">DON'T RUSH</span></li>
-          <li><span class="n">07</span><span class="t">HIGH NOTE</span></li>
-          <li><span class="n">08</span><span class="t">OPP BIH</span></li>
-          <li><span class="n">09</span><span class="t">THAT SOMEBODY</span></li>
-          <li><span class="n">10</span><span class="t">HOME TONIGHT</span></li>
-          <li><span class="n">11</span><span class="t">FEMALE FUTURE</span></li>
-          <li><span class="n">12</span><span class="t">KARATE FLO</span></li>
-          <li><span class="n">13</span><span class="t">U OUTTA KNOW</span></li>
-        </ol>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="videos">
-  <div class="wrap">
-    <div class="perf"></div>
-    <div class="sechead">
-      <div>
-        <div class="eyebrow">Visuals</div>
-        <h2>Official videos</h2>
-        <p class="sub">Every release comes with a visual. Shot around Dallas with the city's own camera crews.</p>
-      </div>
-      <a class="btn ghost" href="https://youtu.be/WJJ4ZXtPwB0" target="_blank" rel="noopener">Watch on YouTube</a>
-    </div>
-    <div class="vgrid">
-      <a class="vid" href="https://youtu.be/WJJ4ZXtPwB0" target="_blank" rel="noopener">
-        <div class="vthumb"><img src="assets/v-paparazzi.jpg" alt="Still from the Paparazzi music video">
-          <div class="play"><span><svg viewBox="0 0 24 24"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
-        <div class="vbody"><h3>PAPARAZZI</h3><p>Official video · shot by @visualzbydee</p></div>
-      </a>
-      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
-        <div class="vthumb"><img src="assets/v-blicca.jpg" alt="Still from the Blicca Flo video, shot under a Dallas overpass">
-          <div class="play"><span><svg viewBox="0 0 24 24"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
-        <div class="vbody"><h3>BLICCA FLO</h3><p>Official video · Mic Check'd w/ Live &amp; Lit</p></div>
-      </a>
-      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
-        <div class="vthumb"><img src="assets/v-bighomie.jpg" alt="Still from the Big Homie music video">
-          <div class="play"><span><svg viewBox="0 0 24 24"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
-        <div class="vbody"><h3>BIG HOMIE</h3><p>Official video · on YouTube</p></div>
-      </a>
-      <a class="vid" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">
-        <div class="vthumb"><img src="assets/v-shelike.jpg" alt="Still from the Know What She Like video">
-          <div class="play"><span><svg viewBox="0 0 24 24"><path d="M6 3l16 9-16 9z"/></svg></span></div></div>
-        <div class="vbody"><h3>KNOW WHAT SHE LIKE</h3><p>Out now · shot by @movisuals77</p></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section id="next">
-  <div class="wrap">
-    <div class="next">
-      <img src="assets/art-sharks.jpg" alt="Sharks &amp; Eagles single artwork — an eagle above the water and a shark below it">
-      <div>
-        <div class="countline">Next release · January 15</div>
-        <h2>SHARKS &amp; EAGLES</h2>
-        <p class="sub">The follow-up single. Same motto on the artwork as everything else he puts out — B&amp;D. Pre-save goes live here first.</p>
-        <div class="herocta">
-          <a class="btn gold" href="#booking">Get the drop alert</a>
-          <a class="btn ghost" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">Follow @ajpaydaynosleep</a>
-        </div>
-      </div>
+      <ol class="tracks">
+        <li class="lead"><span class="n">01</span><span class="t">CLAP</span></li>
+        <li><span class="n">02</span><span class="t">ME AND YOU</span></li>
+        <li class="lead"><span class="n">03</span><span class="t">RIZZ IT UP</span></li>
+        <li><span class="n">04</span><span class="t">PRECIOUS</span></li>
+        <li><span class="n">05</span><span class="t">BIG ONE (WALK)</span></li>
+        <li><span class="n">06</span><span class="t">DON'T RUSH</span></li>
+        <li><span class="n">07</span><span class="t">HIGH NOTE</span></li>
+        <li><span class="n">08</span><span class="t">OPP BIH</span></li>
+        <li><span class="n">09</span><span class="t">THAT SOMEBODY</span></li>
+        <li><span class="n">10</span><span class="t">HOME TONIGHT</span></li>
+        <li><span class="n">11</span><span class="t">FEMALE FUTURE</span></li>
+        <li><span class="n">12</span><span class="t">KARATE FLO</span></li>
+        <li><span class="n">13</span><span class="t">U OUTTA KNOW</span></li>
+      </ol>
     </div>
   </div>
 </section>
 
 <section id="screen">
   <div class="wrap">
-    <div class="perf"></div>
     <div class="sechead">
       <div>
         <div class="eyebrow">On screen</div>
         <h2>Acting &amp; film</h2>
-        <p class="sub">The other half of the résumé — work with Dallas FilmHub, Cliffwoods and IRM Films.</p>
+        <p class="sub">The other half of the résumé.</p>
       </div>
     </div>
     <div class="fgrid">
       <article class="film">
         <img src="assets/f-theone.jpg" alt="Still from the short film The One">
-        <div class="fb"><h3>THE ONE</h3><p class="role2">Short film · IRM Films</p>
-        <p>Out now on the IRM Films YouTube channel.</p></div>
+        <div class="fb"><h3>THE ONE</h3><p class="role2">Short film</p>
+          <p>Streaming now on YouTube.</p></div>
       </article>
       <article class="film">
         <img src="assets/f-exotics.jpg" alt="Still from the short film Exotics Only">
-        <div class="fb"><h3>EXOTICS ONLY</h3><p class="role2">Short film · Dallas FilmHub × Cliffwoods</p>
-        <p>Full short film streaming now.</p></div>
+        <div class="fb"><h3>EXOTICS ONLY</h3><p class="role2">Short film</p>
+          <p>Full short film out now.</p></div>
       </article>
       <article class="film">
-        <img src="assets/pr-pimpinken.jpg" alt="Payday AJ on camera during an On The Spot interview">
-        <div class="fb"><h3>ON THE SPOT</h3><p class="role2">Appearance · with Pimpin Ken</p>
-        <p>Plus FilmHub Friday: Church Edition with the Dallas FilmHub crew.</p></div>
+        <img src="assets/pr-pimpinken.jpg" alt="PAYDAY AJ on camera">
+        <div class="fb"><h3>ON CAMERA</h3><p class="role2">Appearances</p>
+          <p><span class="todo">Needs from AJ</span> Acting reel and clips — he has these.</p></div>
       </article>
     </div>
   </div>
 </section>
 
-<section id="numbers">
+<section class="alt">
   <div class="wrap">
+    <div class="perf"></div>
     <div class="sechead">
       <div>
-        <div class="eyebrow">Reach</div>
-        <h2>The numbers &amp; the co-signs</h2>
-        <p class="sub">What a booker, a label A&amp;R or a brand asks for first — in one place instead of scattered across a feed.</p>
+        <div class="eyebrow">Co-signs</div>
+        <h2>Who's put him on</h2>
       </div>
     </div>
-    <div class="numwrap">
-      <div>
-        <div class="stats">
-          <div class="stat"><div class="v">9,542</div><div class="k">Instagram followers</div></div>
-          <div class="stat"><div class="v">57</div><div class="k">Countries streamed in</div></div>
-          <div class="stat"><div class="v">13.3K</div><div class="k">Spotify listeners</div></div>
-          <div class="stat"><div class="v">14.8K</div><div class="k">Spotify streams</div></div>
-        </div>
-        <div class="press">
-          <div class="pr"><span class="who">All Vybes</span><span class="what">Sit-down interview</span><span class="tag">Interview</span></div>
-          <div class="pr"><span class="who">HalfPint Filmz × Dallas Global Digital</span><span class="what">Song review from the Dallas gatekeepers</span><span class="tag">Review</span></div>
-          <div class="pr"><span class="who">Live &amp; Lit Music</span><span class="what">Mic Check'd session</span><span class="tag">Session</span></div>
-          <div class="pr"><span class="who">Next Up — New Music in Dallas</span><span class="what">Artist You Should Know feature</span><span class="tag">Feature</span></div>
-          <div class="pr"><span class="who">On The Spot with Pimpin Ken</span><span class="what">On-camera appearance</span><span class="tag">Appearance</span></div>
-        </div>
-      </div>
-      <div>
-        <img class="wrapped" src="assets/wrapped.jpg" alt="Spotify for Artists Wrapped card for PayDay AJ">
-        <p class="wrapcap">Spotify Wrapped card, as posted by the artist</p>
-      </div>
+    <div class="press">
+      <div><div class="who">All Vybes</div><div class="what">Interview</div></div>
+      <div><div class="who">HalfPint Filmz</div><div class="what">Review</div></div>
+      <div><div class="who">Dallas Global Digital</div><div class="what">Review</div></div>
+      <div><div class="who">Live &amp; Lit Music</div><div class="what">Mic Check'd session</div></div>
+      <div><div class="who">Next Up Dallas</div><div class="what">Artist You Should Know</div></div>
+      <div><div class="who">On The Spot</div><div class="what">Appearance</div></div>
     </div>
   </div>
 </section>
 
 <section id="about">
   <div class="wrap">
-    <div class="perf"></div>
     <div class="about">
       <div>
         <div class="eyebrow">About</div>
-        <p class="pull">Dallas made him. <em>Blessed &amp; Determined</em> is the whole plan, printed on everything he drops.</p>
-        <p>Payday AJ is a Dallas artist, actor and independent operator who spent years putting out singles and visuals before turning it into a debut album. BIGGEST PAYDAY EVER landed on Halloween 2025 — thirteen tracks, a Texas Powerball ticket on the cover, and no label behind it.</p>
-        <p>Between releases he's on set: short films with Dallas FilmHub and Cliffwoods, a lead in IRM Films' <em style="font-style:normal;color:var(--gold)">The One</em>, interviews with the people who decide what Dallas hears next.</p>
-        <p>Music, film, and the business behind both — run out of one city, on his own terms.</p>
+        <h2 style="margin-bottom:20px">Dallas made him</h2>
+        <p>PAYDAY AJ is a Dallas artist, songwriter and actor. Years of singles and visuals turned into a debut album — BIGGEST PAYDAY EVER landed on Halloween 2025, thirteen tracks, no label behind it.</p>
+        <p>Between releases he's on set, and on camera with the people who decide what Dallas hears next.</p>
+        <p style="margin-top:22px"><span class="todo">Needs from AJ</span><br>
+          <span style="color:var(--muted);font-size:14.5px">A longer bio in his own words — this is placeholder copy built from public info. Record him talking for two minutes and we'll transcribe it.</span></p>
       </div>
       <div class="photostack">
-        <img class="tall" src="assets/ph-stool.jpg" alt="Studio portrait of Payday AJ seated on a stool">
-        <img src="assets/ph-fit.jpg" alt="Payday AJ outside in Dallas">
-        <img src="assets/ph-dallas.jpg" alt="Reunion Tower and the Dallas skyline">
+        <img class="tall" src="assets/hero.jpg" alt="PAYDAY AJ in Dallas">
+        <img src="assets/ph-fit.jpg" alt="PAYDAY AJ">
+        <img src="assets/ph-dallas.jpg" alt="The Dallas skyline">
       </div>
     </div>
   </div>
 </section>
 
-<section id="booking">
+<section id="merch" class="alt">
   <div class="wrap">
+    <div class="perf"></div>
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">Merch</div>
+        <h2>B&amp;D</h2>
+        <p class="sub"><span class="todo">Needs from AJ</span> &nbsp;Product photos, names, prices and where it's sold. He has merch — this section is built and waiting.</p>
+      </div>
+    </div>
+    <div class="slots">
+      <div class="slot">Product 01</div>
+      <div class="slot">Product 02</div>
+      <div class="slot">Product 03</div>
+      <div class="slot">Product 04</div>
+    </div>
+  </div>
+</section>
+
+<section id="shows">
+  <div class="wrap">
+    <div class="sechead">
+      <div>
+        <div class="eyebrow">Live</div>
+        <h2>Show dates</h2>
+        <p class="sub"><span class="todo">Needs from AJ</span> &nbsp;Dates, cities, venues and ticket links. He has dates — drop them in and this fills itself.</p>
+      </div>
+      <a class="btn ghost" href="#booking">Book a show</a>
+    </div>
+    <div class="tablewrap">
+      <table class="shows">
+        <thead><tr><th>Date</th><th>City</th><th>Venue</th><th>Tickets</th></tr></thead>
+        <tbody>
+          <tr><td class="date">—</td><td class="empty">Dates go here</td><td class="empty">Venue</td><td class="empty">Link</td></tr>
+          <tr><td class="date">—</td><td class="empty">Dates go here</td><td class="empty">Venue</td><td class="empty">Link</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="booking" class="alt">
+  <div class="wrap">
+    <div class="perf"></div>
     <div class="bookgrid">
       <div>
         <div class="eyebrow">Booking</div>
-        <h2>Shows, features &amp; press</h2>
-        <p class="sub">One inbox for everything — no more DMs getting buried under 2,700 follows.</p>
-        <dl class="contactlist">
-          <div><dt>Bookings &amp; shows</dt><dd>[ADD BOOKING EMAIL]</dd></div>
-          <div><dt>Features &amp; verses</dt><dd>[ADD FEATURE RATE / EMAIL]</dd></div>
-          <div><dt>Press &amp; interviews</dt><dd>[ADD PRESS CONTACT]</dd></div>
-          <div><dt>Management</dt><dd>[ADD MANAGER, IF ANY]</dd></div>
+        <h2>Let's work</h2>
+        <p class="sub">Shows, features, shoots and press. One form, straight to AJ — no DMs, no back and forth to find out what you need.</p>
+        <dl class="terms">
+          <div><dt>To lock a date</dt><dd>20% deposit<small>Zelle · Cash App · Apple Pay</small></dd></div>
+          <div><dt>Features</dt><dd>Back in about a week<small>From the day the beat and the deposit land</small></dd></div>
+          <div><dt>Pricing</dt><dd>Quoted per request<small>Tell us the budget and what it's for — you'll get a number back</small></dd></div>
+          <div><dt>Cancellations</dt><dd>Deposit is non-refundable<small><span class="todo">Draft — AJ to approve</span> Reschedule once with 72 hours' notice.</small></dd></div>
         </dl>
       </div>
       <div>
+        <div class="picker" role="group" aria-label="What are you booking?">
+          <button type="button" data-branch="show" aria-pressed="true">Book a show</button>
+          <button type="button" data-branch="feature" aria-pressed="false">Buy a verse / feature</button>
+          <button type="button" data-branch="shoot" aria-pressed="false">Video or photo shoot</button>
+          <button type="button" data-branch="press" aria-pressed="false">Interview or podcast</button>
+        </div>
+
         <form id="bookform" novalidate>
-          <div class="row">
-            <div><label for="nm">Name</label><input id="nm" name="nm" placeholder="Your name"></div>
-            <div><label for="em">Email</label><input id="em" name="em" type="email" placeholder="you@email.com"></div>
-          </div>
-          <div class="row">
-            <div><label for="kind">Inquiry</label>
-              <select id="kind" name="kind">
-                <option>Book a show</option>
-                <option>Feature / verse</option>
-                <option>Video or photo shoot</option>
-                <option>Press / interview</option>
-                <option>Something else</option>
-              </select>
+          <input type="hidden" id="requestType" name="requestType" value="show">
+          <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+
+          <fieldset id="fs-show">
+            <div class="row">
+              <div><label for="s-date">Date</label><input id="s-date" name="showDate" type="date" required></div>
+              <div><label for="s-len">Set length</label><input id="s-len" name="setLength" placeholder="30 min, 45 min…" required></div>
             </div>
-            <div><label for="dt2">Date</label><input id="dt2" name="dt2" type="date"></div>
+            <div><label for="s-venue">City and venue</label><input id="s-venue" name="cityVenue" placeholder="Dallas — Trees" required></div>
+          </fieldset>
+
+          <fieldset id="fs-feature" hidden>
+            <div class="row">
+              <div><label for="f-due">Deadline</label><input id="f-due" name="deadline" type="date" required></div>
+              <div><label for="f-part">Hook, verse, or both</label>
+                <select id="f-part" name="part" required>
+                  <option>Verse only</option><option>Hook only</option><option>Hook and verse</option>
+                </select></div>
+            </div>
+            <div class="row">
+              <div><label for="f-clear">Is the beat cleared?</label>
+                <select id="f-clear" name="beatCleared" required>
+                  <option>Yes — fully cleared</option><option>No</option><option>Not sure</option>
+                </select></div>
+              <div><label for="f-split">Streaming and publishing split</label><input id="f-split" name="splits" placeholder="50/50, 70/30…" required></div>
+            </div>
+            <div><label for="f-link">Link to the beat or a reference</label><input id="f-link" name="beatLink" placeholder="Optional"></div>
+          </fieldset>
+
+          <fieldset id="fs-shoot" hidden>
+            <div class="row">
+              <div><label for="v-date">Shoot date</label><input id="v-date" name="shootDate" type="date" required></div>
+              <div><label for="v-type">Video or photo</label>
+                <select id="v-type" name="shootType" required><option>Music video</option><option>Photo shoot</option><option>Both</option></select></div>
+            </div>
+            <div><label for="v-loc">City and location</label><input id="v-loc" name="shootLocation" required></div>
+          </fieldset>
+
+          <fieldset id="fs-press" hidden>
+            <div class="row">
+              <div><label for="p-outlet">Outlet or show</label><input id="p-outlet" name="outlet" required></div>
+              <div><label for="p-date">Date</label><input id="p-date" name="pressDate" type="date" required></div>
+            </div>
+            <div><label for="p-format">In person or remote</label>
+              <select id="p-format" name="format" required><option>In person</option><option>Remote</option></select></div>
+          </fieldset>
+
+          <div><label for="b-budget">Budget</label><input id="b-budget" name="budget" placeholder="A number or a range — this is how you get a real quote back" required></div>
+          <div class="row">
+            <div><label for="b-name">Your name</label><input id="b-name" name="name" required></div>
+            <div><label for="b-email">Email</label><input id="b-email" name="email" type="email" required></div>
           </div>
-          <div><label for="msg">Details</label><textarea id="msg" name="msg" placeholder="Venue, city, budget, timeline — whatever you've got."></textarea></div>
-          <button class="btn gold" type="submit">Send inquiry</button>
-          <div id="formmsg">Sent — in the real build this lands in the booking inbox and fires a text alert.</div>
-          <p class="formnote">Demo form. On the live site this hooks to email + a calendar so dates can't double-book.</p>
+          <div class="row">
+            <div><label for="b-phone">Phone</label><input id="b-phone" name="phone" type="tel" required></div>
+            <div><label for="b-more">Anything else</label><input id="b-more" name="notes" placeholder="Optional"></div>
+          </div>
+          <button class="btn gold" type="submit">Send request</button>
+          <p class="formnote">Required fields are the ones AJ needs before he can answer. Nothing else is asked.</p>
         </form>
+
+        <div class="sent" id="sent-ok" hidden>
+          <h3>Request sent</h3>
+          <p>It's in AJ's inbox. Reference <b id="sent-id">—</b> — keep that if you follow up.</p>
+          <p>You'll get a quote back. To lock a date: 20% deposit by Zelle, Cash App or Apple Pay. Features come back in about a week.</p>
+        </div>
+
+        <div class="sent" id="sent" hidden>
+          <h3>Almost there</h3>
+          <p>The booking inbox is being set up right now. Until it's live, the fastest way to reach AJ is a DM — <a href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">@ajpaydaynosleep</a>. Send the same details you just filled in and you'll get a quote back.</p>
+          <p>To lock a date: 20% deposit by Zelle, Cash App or Apple Pay. Features come back in about a week.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="pitch">
+<div class="mail">
   <div class="wrap">
-    <div class="eyebrow" style="color:#8A6B14">What a real build adds</div>
-    <h2>This is the mockup. Here's the rest.</h2>
-    <p class="sub">Everything above is static. The version that actually works for an independent artist does these things too.</p>
-    <div class="plist">
-      <div><h4>Mailing list + SMS</h4><p>Fans you own, not followers a platform rents you. Drop alerts go out the second a release lands.</p></div>
-      <div><h4>Merch store</h4><p>B&amp;D drops sold direct, no cut to a third party marketplace.</p></div>
-      <div><h4>Tour &amp; show dates</h4><p>Live calendar, ticket links, past-show archive that doubles as proof for bookers.</p></div>
-      <div><h4>Press kit download</h4><p>One link for venues and blogs: bio, hi-res photos, logo, stage plot, streaming numbers.</p></div>
-      <div><h4>Real analytics</h4><p>Where visitors come from, which song they click, which city to book next.</p></div>
-      <div><h4>Owns the search result</h4><p>"Payday AJ" pulls up his own site first, not a scattered set of profiles.</p></div>
+    <div>
+      <h3>Hear it first</h3>
+      <p>Unreleased snippets and drop alerts before they go public.</p>
     </div>
-    <p class="pitchfoot">Concept, design and build — X · Dallas, TX · [ADD YOUR EMAIL / PHONE]</p>
+    <form class="mailform" onsubmit="return false">
+      <input type="email" placeholder="you@email.com" aria-label="Email address">
+      <button class="btn" type="submit">Join</button>
+    </form>
   </div>
-</section>
+</div>
 
 <footer>
   <div class="wrap fgrid2">
     <div>
-      <div class="brand" style="margin-bottom:14px"><img src="assets/avatar.jpg" alt="">PAYDAY&nbsp;AJ</div>
+      <div class="brand" style="font-size:15px"><img src="assets/avatar.jpg" alt="">PAYDAY&nbsp;AJ</div>
       <div class="socials">
         <a class="plat" href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">Instagram</a>
         <a class="plat" href="https://youtu.be/WJJ4ZXtPwB0" target="_blank" rel="noopener">YouTube</a>
@@ -598,22 +378,13 @@ footer{padding:48px 0 60px;border-top:1px solid var(--line)}
       </div>
     </div>
     <p class="small">
-      Unofficial concept mockup — not affiliated with or endorsed by Payday AJ.<br>
-      Photos, artwork, song titles and credits are the artist's own, pulled from the public
-      <a href="https://www.instagram.com/ajpaydaynosleep/" target="_blank" rel="noopener">@ajpaydaynosleep</a> profile and his
-      <a href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever" target="_blank" rel="noopener">HyperFollow page</a>,
-      and used here only to show a proposed design.<br>
-      Bracketed fields are placeholders — nothing on this page was invented.
+      © PAYDAY AJ · Dallas, Texas<br>
+      Blessed &amp; Determined<br>
+      Booking: <span class="todo">Add booking email</span>
     </p>
   </div>
 </footer>
 
-<script>
-document.getElementById('bookform').addEventListener('submit', function(e){
-  e.preventDefault();
-  document.getElementById('formmsg').style.display = 'block';
-});
-</script>
-
+<script src="app.js"></script>
 </body>
 </html>
