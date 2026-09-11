@@ -23,7 +23,13 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   function show(branch) {
     BRANCHES.forEach(function (b) {
       var fs = document.getElementById('fs-' + b);
-      if (fs) fs.hidden = b !== branch;
+      if (!fs) return;
+      var on = (b === branch);
+      fs.hidden = !on;
+      // A hidden `required` field still blocks submit, and the browser can't
+      // focus it to say why — the button just does nothing. Disabled
+      // fieldsets skip validation and stay out of FormData.
+      fs.disabled = !on;
     });
     picker.querySelectorAll('button').forEach(function (btn) {
       btn.setAttribute('aria-pressed', String(btn.dataset.branch === branch));
