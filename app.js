@@ -7,7 +7,7 @@
    While ENDPOINT is empty the form shows the Instagram fallback instead of
    pretending to send. */
 
-var ENDPOINT = '';
+var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QVcEsmSxS7ziypPD2IQn_mXD-Ft2eK3ej5wARK_vyDZgV/exec';
 
 (function () {
   'use strict';
