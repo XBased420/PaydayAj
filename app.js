@@ -94,3 +94,80 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
 
   show('show');
 })();
+/* ================================================================
+   Nav — transparent over the hero, solid once you scroll
+   ================================================================ */
+(function () {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  function onScroll() {
+    nav.classList.toggle('stuck', window.scrollY > 40);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ================================================================
+   Hero — a muted, looping video behind the type
+   Picks one of the IDs in data-shuffle at random on each load, so the
+   page doesn't open the same way twice. The still image underneath is
+   the fallback: it shows while the video buffers and stays put if the
+   browser refuses autoplay.
+   ================================================================ */
+(function () {
+  var bg = document.querySelector('.hero-bg[data-shuffle]');
+  var slot = document.getElementById('hero-video');
+  if (!bg || !slot) return;
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ids = bg.dataset.shuffle.split(',').map(function (s) { return s.trim(); })
+              .filter(Boolean);
+  if (!ids.length) return;
+  var id = ids[Math.floor(Math.random() * ids.length)];
+
+  function start() {
+    var src = 'https://www.youtube-nocookie.com/embed/' + id +
+      '?autoplay=1&mute=1&loop=1&playlist=' + id +
+      '&controls=0&disablekb=1&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3';
+    var f = document.createElement('iframe');
+    f.src = src;
+    f.title = '';
+    f.setAttribute('frameborder', '0');
+    f.setAttribute('tabindex', '-1');
+    f.allow = 'autoplay; encrypted-media';
+    slot.appendChild(f);
+    setTimeout(function () { slot.classList.add('on'); }, 900);
+  }
+
+  if (document.readyState === 'complete') setTimeout(start, 400);
+  else addEventListener('load', function () { setTimeout(start, 400); });
+})();
+
+/* ================================================================
+   Video cards — thumbnail until clicked, then it plays in the box
+   Loading four iframes up front would cost megabytes before anyone
+   presses anything, so each card stays a picture until it's wanted.
+   To add a video: copy a card in index.html and change data-yt,
+   the two image URLs, and the title.
+   ================================================================ */
+(function () {
+  document.querySelectorAll('.vid[data-yt]').forEach(function (card) {
+    var btn = card.querySelector('.vthumb');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (card.classList.contains('playing')) return;
+      var id = card.dataset.yt;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id +
+        '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+      f.title = card.querySelector('h3').textContent;
+      f.setAttribute('frameborder', '0');
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      btn.innerHTML = '';
+      btn.appendChild(f);
+      card.classList.add('playing');
+    });
+  });
+})();
