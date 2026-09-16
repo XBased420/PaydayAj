@@ -402,6 +402,52 @@
   </div>
 </footer>
 
+
+<!-- ================================================================
+     BACKGROUND PLAYER
+     One tap to start — browsers block sound until the visitor clicks
+     something, so it can't and shouldn't autoplay. Volume opens at 65%.
+     To add a track: drop the mp3 in assets/audio/ and add an entry to
+     data-tracks below. src / title / url. Nothing else changes.
+     ================================================================ -->
+<div class="player" id="player" role="region" aria-label="Music player"
+     data-volume="0.65"
+     data-tracks='[
+       {"src":"assets/audio/know-what-she-like.mp3","title":"KNOW WHAT SHE LIKE","url":"https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever"},
+       {"src":"assets/audio/dont-rush.mp3","title":"DON&apos;T RUSH","url":"https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever"}
+     ]'>
+  <div class="inner">
+    <button class="pbtn" id="ptoggle" type="button" aria-label="Play music">
+      <svg viewBox="0 0 24 24" aria-hidden="true" id="picon"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+
+    <button class="skip" id="pnext" type="button" aria-label="Next track">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+    </button>
+
+    <div class="nowbox">
+      <div class="k" id="pstate">Now playing &middot; shuffle</div>
+      <a class="t" id="ptitle" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever"
+         target="_blank" rel="noopener">KNOW WHAT SHE LIKE</a>
+    </div>
+
+    <div class="eqbox" aria-hidden="true" id="peq">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="vol">
+      <svg class="vi" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4zM14 2v2a8 8 0 010 16v2a10 10 0 000-20z"/></svg>
+      <input type="range" id="pvol" min="0" max="100" value="65" step="1"
+             aria-label="Volume" style="--fill:65%">
+    </div>
+
+    <span class="serialtag">NO. 001</span>
+
+    <a class="plink" href="https://distrokid.com/hyperfollow/paydayaj/biggest-payday-ever"
+       target="_blank" rel="noopener">Stream it</a>
+  </div>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
