@@ -413,3 +413,60 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
 
   setIcon(false);
 })();
+
+/* ================================================================
+   Scroll reveals
+   The .rise class starts an element invisible, so it is added by JS
+   and only when IntersectionObserver exists — with scripting off, or
+   on a browser too old for the observer, every element stays plainly
+   visible instead of disappearing forever. Reduced-motion opts out
+   before anything is tagged.
+   ================================================================ */
+(function () {
+  'use strict';
+  if (!('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Deliberately not the hero: it's above the fold, and fading in the
+  // headline on load is the cheapest-looking effect on the internet.
+  var targets = document.querySelectorAll(
+    'section .sechead, .vid, .press > div, .about > div, ' +
+    '.film, .photostack, .bookgrid > *, .album > *'
+  );
+  if (!targets.length) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('seen');
+      io.unobserve(e.target);      // once seen, stop paying for it
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+  targets.forEach(function (el) {
+    el.classList.add('rise');
+    io.observe(el);
+  });
+})();
+
+/* ================================================================
+   Nav state without a scroll listener
+   A sentinel at the top of the page tells us when the hero's first
+   64px have left the viewport. Same result as listening to scroll,
+   but the work happens off the main thread instead of on every
+   single scroll event.
+   ================================================================ */
+(function () {
+  'use strict';
+  var nav = document.querySelector('.nav');
+  if (!nav || !('IntersectionObserver' in window)) return;   // scroll handler above still covers this
+
+  var mark = document.createElement('div');
+  mark.setAttribute('aria-hidden', 'true');
+  mark.style.cssText = 'position:absolute;top:40px;left:0;width:1px;height:1px;pointer-events:none';
+  document.body.appendChild(mark);
+
+  new IntersectionObserver(function (e) {
+    nav.classList.toggle('stuck', !e[0].isIntersecting);
+  }).observe(mark);
+})();
