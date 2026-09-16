@@ -171,3 +171,183 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     });
   });
 })();
+
+
+/* ================================================================
+   Background player — shuffle, one tap to start
+   Browsers have blocked autoplay-with-sound since 2018, so nothing
+   here tries to sneak audio past the visitor. The bar is always
+   visible and one tap from playing; after that it keeps going as
+   they scroll and rolls into the next track on its own.
+
+   Volume opens at 65% and remembers whatever they set it to.
+   Playing a video card pauses the music so the two never fight.
+
+   To add a track: drop the mp3 in assets/audio/ and add an entry to
+   data-tracks on #player in index.html.
+   ================================================================ */
+(function () {
+  'use strict';
+
+  var bar = document.getElementById('player');
+  if (!bar) return;
+
+  var tracks;
+  try { tracks = JSON.parse(bar.dataset.tracks); }
+  catch (err) { bar.hidden = true; return; }
+  if (!tracks || !tracks.length) { bar.hidden = true; return; }
+
+  var toggle  = document.getElementById('ptoggle');
+  var icon    = document.getElementById('picon');
+  var nextBtn = document.getElementById('pnext');
+  var titleEl = document.getElementById('ptitle');
+  var stateEl = document.getElementById('pstate');
+  var volEl   = document.getElementById('pvol');
+  var eqBars  = [].slice.call(document.querySelectorAll('#peq i'));
+
+  var PLAY  = 'M8 5v14l11-7z';
+  var PAUSE = 'M6 5h4v14H6zM14 5h4v14h-4z';
+  var KEY_VOL = 'payday.vol';
+  var KEY_ON  = 'payday.playing';
+
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function read(k)     { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  /* --- order: shuffled once per load, so it doesn't open the same way twice */
+  var order = tracks.map(function (t, i) { return i; });
+  for (var i = order.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+  }
+  var pos = 0;
+
+  var audio = new Audio();
+  audio.preload = 'none';          // nothing downloads until they press play
+  audio.crossOrigin = 'anonymous';
+
+  var saved = parseFloat(read(KEY_VOL));
+  var vol = (saved >= 0 && saved <= 1) ? saved
+          : (parseFloat(bar.dataset.volume) || 0.65);
+  audio.volume = vol;
+  if (volEl) {
+    volEl.value = Math.round(vol * 100);
+    volEl.style.setProperty('--fill', volEl.value + '%');
+  }
+
+  function load(idx) {
+    var t = tracks[order[idx]];
+    audio.src = t.src;
+    if (titleEl) {
+      titleEl.textContent = t.title;
+      if (t.url) titleEl.href = t.url;
+    }
+  }
+  load(pos);
+
+  function setIcon(playing) {
+    var path = icon && icon.querySelector('path');
+    if (path) path.setAttribute('d', playing ? PAUSE : PLAY);
+    if (toggle) toggle.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+    bar.classList.toggle('on', playing);
+    if (stateEl) stateEl.textContent = playing ? 'Now playing · shuffle' : 'Paused · tap to play';
+  }
+
+  function play() {
+    var p = audio.play();
+    if (p && p.catch) p.catch(function () { setIcon(false); });
+    connectAnalyser();
+  }
+
+  audio.addEventListener('play',  function () { setIcon(true);  store(KEY_ON, '1'); });
+  audio.addEventListener('pause', function () { setIcon(false); store(KEY_ON, '0'); });
+
+  audio.addEventListener('ended', function () {
+    pos = (pos + 1) % order.length;
+    load(pos);
+    play();
+  });
+
+  // A track that won't load shouldn't leave a dead button — skip past it.
+  audio.addEventListener('error', function () {
+    if (order.length < 2) { bar.hidden = true; return; }
+    pos = (pos + 1) % order.length;
+    load(pos);
+  });
+
+  if (toggle) toggle.addEventListener('click', function () {
+    if (audio.paused) play(); else audio.pause();
+  });
+
+  if (nextBtn) nextBtn.addEventListener('click', function () {
+    var wasOn = !audio.paused;
+    pos = (pos + 1) % order.length;
+    load(pos);
+    if (wasOn) play(); else setIcon(false);
+  });
+
+  if (volEl) volEl.addEventListener('input', function () {
+    var v = Number(volEl.value) / 100;
+    audio.volume = v;
+    volEl.style.setProperty('--fill', volEl.value + '%');
+    store(KEY_VOL, String(v));
+  });
+
+  /* --- the bars, driven by the actual waveform --------------------
+     Same-origin audio, so the analyser can read it. If any of this
+     throws — older browser, blocked context — the CSS keyframes keep
+     running and nobody notices. */
+  var ctx, analyser, data, raf;
+
+  function connectAnalyser() {
+    if (ctx || !window.AudioContext && !window.webkitAudioContext) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var src = ctx.createMediaElementSource(audio);
+      analyser = ctx.createAnalyser();
+      analyser.fftSize = 64;
+      analyser.smoothingTimeConstant = 0.75;
+      src.connect(analyser);
+      analyser.connect(ctx.destination);
+      data = new Uint8Array(analyser.frequencyBinCount);
+      bar.classList.add('live');
+      tick();
+    } catch (err) { ctx = null; }
+  }
+
+  function tick() {
+    raf = requestAnimationFrame(tick);
+    if (!analyser) return;
+    if (audio.paused) {
+      eqBars.forEach(function (b) { b.style.height = '26%'; });
+      return;
+    }
+    analyser.getByteFrequencyData(data);
+    for (var k = 0; k < eqBars.length; k++) {
+      var v = data[k * 2 + 1] / 255;
+      eqBars[k].style.height = Math.max(12, v * 100) + '%';
+    }
+  }
+
+  // A suspended context after a tab switch needs a nudge.
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && ctx && ctx.state === 'suspended') ctx.resume();
+  });
+
+  /* --- don't talk over the videos --------------------------------- */
+  document.querySelectorAll('.vid[data-yt] .vthumb').forEach(function (b) {
+    b.addEventListener('click', function () { if (!audio.paused) audio.pause(); });
+  });
+
+  /* --- if they were listening last visit, pick it back up ----------
+     Only works when the browser already trusts this site enough to
+     allow sound; otherwise the promise rejects and the bar just sits
+     there paused, which is the correct outcome. */
+  if (read(KEY_ON) === '1') {
+    var resume = function () { play(); };
+    if (document.readyState === 'complete') setTimeout(resume, 300);
+    else addEventListener('load', function () { setTimeout(resume, 300); });
+  }
+
+  setIcon(false);
+})();
