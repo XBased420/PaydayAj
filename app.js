@@ -26,9 +26,10 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
       if (!fs) return;
       var on = (b === branch);
       fs.hidden = !on;
-      // A hidden `required` field still blocks submit, and the browser can't
-      // focus it to say why — the button just does nothing. Disabled
-      // fieldsets skip validation and stay out of FormData.
+      // Disabling matters as much as hiding: a hidden `required` field still
+      // blocks submit, and the browser can't focus it to say why — the button
+      // just does nothing. Disabled fieldsets skip validation and stay out of
+      // FormData.
       fs.disabled = !on;
     });
     picker.querySelectorAll('button').forEach(function (btn) {
@@ -94,6 +95,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
 
   show('show');
 })();
+
 /* ================================================================
    Nav — transparent over the hero, solid once you scroll
    ================================================================ */
@@ -137,9 +139,11 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     f.setAttribute('tabindex', '-1');
     f.allow = 'autoplay; encrypted-media';
     slot.appendChild(f);
+    // Fade in once it has had a moment to actually start.
     setTimeout(function () { slot.classList.add('on'); }, 900);
   }
 
+  // Wait for the rest of the page so the video never delays first paint.
   if (document.readyState === 'complete') setTimeout(start, 400);
   else addEventListener('load', function () { setTimeout(start, 400); });
 })();
@@ -171,7 +175,6 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     });
   });
 })();
-
 
 /* ================================================================
    Background player — shuffle, one tap to start
@@ -223,7 +226,6 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
 
   var audio = new Audio();
   audio.preload = 'none';          // nothing downloads until they press play
-  audio.crossOrigin = 'anonymous';
 
   var saved = parseFloat(read(KEY_VOL));
   var vol = (saved >= 0 && saved <= 1) ? saved
@@ -252,10 +254,12 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     if (stateEl) stateEl.textContent = playing ? 'Now playing · shuffle' : 'Paused · tap to play';
   }
 
-  function play() {
+  function play(fromTap) {
     var p = audio.play();
     if (p && p.catch) p.catch(function () { setIcon(false); });
-    connectAnalyser();
+    // The analyser may only be built on a real user gesture — see the long
+    // note on connectAnalyser below.
+    if (fromTap) connectAnalyser();
   }
 
   audio.addEventListener('play',  function () { setIcon(true);  store(KEY_ON, '1'); });
@@ -264,7 +268,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   audio.addEventListener('ended', function () {
     pos = (pos + 1) % order.length;
     load(pos);
-    play();
+    play(false);
   });
 
   // A track that won't load shouldn't leave a dead button — skip past it.
@@ -275,14 +279,14 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   });
 
   if (toggle) toggle.addEventListener('click', function () {
-    if (audio.paused) play(); else audio.pause();
+    if (audio.paused) play(true); else audio.pause();
   });
 
   if (nextBtn) nextBtn.addEventListener('click', function () {
     var wasOn = !audio.paused;
     pos = (pos + 1) % order.length;
     load(pos);
-    if (wasOn) play(); else setIcon(false);
+    if (wasOn) play(true); else setIcon(false);
   });
 
   if (volEl) volEl.addEventListener('input', function () {
@@ -296,25 +300,59 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
      Same-origin audio, so the analyser can read it. If any of this
      throws — older browser, blocked context — the CSS keyframes keep
      running and nobody notices. */
-  var ctx, analyser, data, raf;
+  var ctx, analyser, data, raf, tried = false;
 
+  /* createMediaElementSource() is a ONE-WAY door: the moment it's called,
+     the audio element stops going to the speakers directly and goes through
+     the Web Audio graph instead. If that graph's context isn't actually
+     running, the result is silence — while the element still reports itself
+     as playing and the analyser hands back nothing but zeros. Flat bars and
+     no sound, with no error anywhere.
+
+     So: build the context, wait for it to genuinely reach "running", and
+     only THEN reroute the audio. If it never gets there, close it and leave
+     the element alone — the CSS keyframe bars take over and the music plays
+     normally, which is the outcome that matters. */
   function connectAnalyser() {
-    if (ctx || !window.AudioContext && !window.webkitAudioContext) return;
+    if (ctx || tried) return;
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    try {
-      ctx = new (window.AudioContext || window.webkitAudioContext)();
-      var src = ctx.createMediaElementSource(audio);
-      analyser = ctx.createAnalyser();
-      analyser.fftSize = 64;
-      analyser.smoothingTimeConstant = 0.75;
-      src.connect(analyser);
-      analyser.connect(ctx.destination);
-      data = new Uint8Array(analyser.frequencyBinCount);
-      bar.classList.add('live');
-      tick();
-    } catch (err) { ctx = null; }
+
+    var c;
+    try { c = new AC(); } catch (err) { tried = true; return; }
+
+    function wire() {
+      if (c.state !== 'running') { bail(); return; }
+      try {
+        var src = c.createMediaElementSource(audio);
+        analyser = c.createAnalyser();
+        analyser.fftSize = 64;
+        analyser.smoothingTimeConstant = 0.75;
+        src.connect(analyser);
+        analyser.connect(c.destination);
+        data = new Uint8Array(analyser.frequencyBinCount);
+        ctx = c;
+        bar.classList.add('live');
+        tick();
+        watchdog();
+      } catch (err) { bail(); }
+    }
+
+    function bail() {
+      tried = true;
+      analyser = null;
+      bar.classList.remove('live');
+      try { c.close(); } catch (err) {}
+    }
+
+    if (c.state === 'running') wire();
+    else if (c.resume) c.resume().then(wire, bail);
+    else bail();
   }
 
+  /* One rAF loop, running only while a track is. Each bar reads a bin from
+     the low-mid range, where a rap record actually lives. */
   function tick() {
     raf = requestAnimationFrame(tick);
     if (!analyser) return;
@@ -327,6 +365,30 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
       var v = data[k * 2 + 1] / 255;
       eqBars[k].style.height = Math.max(12, v * 100) + '%';
     }
+  }
+
+  /* A safety net, not a stopwatch. The first version of this judged the
+     analyser after a flat 1.2s and kept condemning it — because with
+     preload="none" the file is still downloading at that point: the element
+     reports itself as playing, currentTime is stuck at 0, and of course
+     every reading is zero. So this only counts a check once the audio has
+     actually moved past its fade-in, and needs three dead readings in a row
+     before it gives up and hands the bars back to the CSS animation. */
+  function watchdog() {
+    var strikes = 0, checks = 0;
+    var timer = setInterval(function () {
+      if (++checks > 25 || !analyser) { clearInterval(timer); return; }
+      if (audio.paused || audio.currentTime < 1.8) return;   // still fading in
+      var sum = 0;
+      for (var n = 0; n < data.length; n++) sum += data[n];
+      if (sum > 0) { clearInterval(timer); return; }         // it's alive
+      if (++strikes >= 3) {
+        clearInterval(timer);
+        analyser = null;
+        bar.classList.remove('live');
+        eqBars.forEach(function (b) { b.style.height = ''; });
+      }
+    }, 700);
   }
 
   // A suspended context after a tab switch needs a nudge.
@@ -344,7 +406,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
      allow sound; otherwise the promise rejects and the bar just sits
      there paused, which is the correct outcome. */
   if (read(KEY_ON) === '1') {
-    var resume = function () { play(); };
+    var resume = function () { play(false); };
     if (document.readyState === 'complete') setTimeout(resume, 300);
     else addEventListener('load', function () { setTimeout(resume, 300); });
   }
