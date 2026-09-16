@@ -117,6 +117,60 @@ h1 .out{color:transparent;-webkit-text-stroke:2px var(--gold);paint-order:stroke
   background:rgba(10,12,9,.5)}
 .herocta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 
+
+/* ---------- money in the letterforms ----------
+   Four copies of the word sit on top of the real one, each filled with
+   nothing but falling bills and clipped to its own glyphs, so the cash is
+   only ever visible INSIDE "PAYDAY" — AJ underneath stays solid gold outline.
+   Each copy runs its own duration and starts mid-cycle on a negative delay;
+   every bill enters above the cap height and exits below the baseline, so
+   the loop restart always happens out of sight.
+   It's a paint animation, so it's deliberately kept to one small element. */
+.pd{position:relative;display:inline-block;isolation:isolate}
+.rain{position:absolute;left:0;top:0;font:inherit;letter-spacing:inherit;
+  color:transparent;-webkit-background-clip:text;background-clip:text;
+  background-repeat:no-repeat;pointer-events:none;user-select:none;
+  -webkit-user-select:none;contain:paint;white-space:nowrap;
+  /* Straight alpha over a cream letter just washes the bills out to pale
+     mint. Multiplying lets the green and gold sink INTO the letterform
+     instead of sitting on top of it, so it reads as printed money rather
+     than a smudge — and the letter stays legible because multiply can
+     only darken, never lift contrast. */
+  mix-blend-mode:multiply}
+.r1{opacity:.92;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
+  background-size:0.3em 0.145em,0.25em 0.12em,0.33em 0.16em;animation:fall-r1 9.5s linear -1.2s infinite}
+@keyframes fall-r1{
+  0%{background-position:calc(6% + 0.00%) -22.0%,calc(45% + 0.00%) -34.0%,calc(77% + 0.00%) -15.0%}
+  25%{background-position:calc(6% + -1.10%) 15.5%,calc(45% + -1.10%) 9.5%,calc(77% + -1.10%) 19.0%}
+  50%{background-position:calc(6% + 1.40%) 53.0%,calc(45% + 1.40%) 53.0%,calc(77% + 1.40%) 53.0%}
+  75%{background-position:calc(6% + -0.70%) 90.5%,calc(45% + -0.70%) 96.5%,calc(77% + -0.70%) 87.0%}
+  100%{background-position:calc(6% + 0.00%) 128.0%,calc(45% + 0.00%) 140.0%,calc(77% + 0.00%) 121.0%}}
+.r2{opacity:.72;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
+  background-size:0.22em 0.105em,0.28em 0.135em,0.2em 0.095em;animation:fall-r2 12.5s linear -6.4s infinite}
+@keyframes fall-r2{
+  0%{background-position:calc(23% + 0.00%) -28.0%,calc(61% + 0.00%) -18.0%,calc(90% + 0.00%) -40.0%}
+  25%{background-position:calc(23% + -1.10%) 12.0%,calc(61% + -1.10%) 17.5%,calc(90% + -1.10%) 6.5%}
+  50%{background-position:calc(23% + 1.40%) 52.0%,calc(61% + 1.40%) 53.0%,calc(90% + 1.40%) 53.0%}
+  75%{background-position:calc(23% + -0.70%) 92.0%,calc(61% + -0.70%) 88.5%,calc(90% + -0.70%) 99.5%}
+  100%{background-position:calc(23% + 0.00%) 132.0%,calc(61% + 0.00%) 124.0%,calc(90% + 0.00%) 146.0%}}
+.r3{opacity:.54;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
+  background-size:0.19em 0.09em,0.33em 0.16em,0.24em 0.115em;animation:fall-r3 15.5s linear -3.1s infinite}
+@keyframes fall-r3{
+  0%{background-position:calc(14% + 0.00%) -36.0%,calc(52% + 0.00%) -21.0%,calc(83% + 0.00%) -30.0%}
+  25%{background-position:calc(14% + -1.10%) 7.5%,calc(52% + -1.10%) 16.0%,calc(83% + -1.10%) 11.0%}
+  50%{background-position:calc(14% + 1.40%) 51.0%,calc(52% + 1.40%) 53.0%,calc(83% + 1.40%) 52.0%}
+  75%{background-position:calc(14% + -0.70%) 94.5%,calc(52% + -0.70%) 90.0%,calc(83% + -0.70%) 93.0%}
+  100%{background-position:calc(14% + 0.00%) 138.0%,calc(52% + 0.00%) 127.0%,calc(83% + 0.00%) 134.0%}}
+.r4{opacity:.38;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
+  background-size:0.26em 0.125em,0.21em 0.1em,0.29em 0.14em;animation:fall-r4 19s linear -9.7s infinite}
+@keyframes fall-r4{
+  0%{background-position:calc(32% + 0.00%) -25.0%,calc(69% + 0.00%) -38.0%,calc(96% + 0.00%) -17.0%}
+  25%{background-position:calc(32% + -1.10%) 13.8%,calc(69% + -1.10%) 7.0%,calc(96% + -1.10%) 18.0%}
+  50%{background-position:calc(32% + 1.40%) 52.5%,calc(69% + 1.40%) 52.0%,calc(96% + 1.40%) 53.0%}
+  75%{background-position:calc(32% + -0.70%) 91.2%,calc(69% + -0.70%) 97.0%,calc(96% + -0.70%) 88.0%}
+  100%{background-position:calc(32% + 0.00%) 130.0%,calc(69% + 0.00%) 142.0%,calc(96% + 0.00%) 123.0%}}
+@media (prefers-reduced-motion:reduce){.rain{display:none}}
+
 /* ---------- sections ---------- */
 section{padding:var(--pad) 0}
 .alt{background:var(--ink-2)}
@@ -221,21 +275,6 @@ h2{font-family:var(--display);font-size:clamp(27px,3.7vw,44px);line-height:1;
 .photostack img{width:100%;height:100%;object-fit:cover}
 .photostack .tall{grid-row:span 2}
 
-/* ---------- merch + shows ---------- */
-.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.slot{aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:20px;
-  box-shadow:inset 0 0 0 1px var(--line-2);color:var(--muted);
-  font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
-  background:repeating-linear-gradient(45deg,transparent,transparent 11px,
-    rgba(224,162,43,.035) 11px,rgba(224,162,43,.035) 22px)}
-.shows{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-.shows th{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);text-align:left;padding:0 0 12px;
-  border-bottom:1px solid var(--line)}
-.shows td{padding:16px 0;border-bottom:1px solid var(--line);font-size:15.5px}
-.shows .date{font-family:var(--mono);color:var(--gold);white-space:nowrap}
-.shows .empty{color:var(--muted);font-family:var(--mono);font-size:13px}
-.tablewrap{overflow-x:auto}
 
 /* ---------- booking ---------- */
 .bookgrid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:start}
@@ -416,3 +455,126 @@ body{padding-bottom:78px}
 @media (prefers-reduced-motion:reduce){
   .eqbox i{animation:none!important;height:45%}
 }
+
+/* ================================================================
+   RESTRAINT PASS + MOTION
+   Everything below intentionally overrides earlier rules rather than
+   editing them, so the original design is one delete away if this
+   direction turns out to be wrong.
+   ================================================================ */
+
+/* ---- 1. breathe ----------------------------------------------
+   The single biggest lever on "does this feel expensive". Roughly
+   40% more air per section and a narrower measure for body copy. */
+:root{--pad:clamp(72px,8vw,118px)}
+.sechead{margin-bottom:clamp(38px,5vw,58px)}
+.sub{max-width:52ch;font-size:15px;color:var(--muted)}
+
+/* ---- 2. drop the banding -------------------------------------
+   Alternating background bands were doing the work of separating
+   sections. Whitespace does it better and leaves one flat black
+   field for the photography to sit on. */
+.alt{background:transparent}
+.perf{border-top:1px solid var(--line);margin-bottom:clamp(30px,4vw,44px)}
+.perf::before,.perf::after{display:none}
+.alt .perf::before,.alt .perf::after{display:none}
+
+/* ---- 3. quieter labels ---------------------------------------
+   The gold eyebrow appeared on all eight sections, which spent the
+   accent colour until it stopped reading as an accent. Now it's
+   muted text with a short green tick, and gold is reserved for
+   things you can actually click. */
+.eyebrow{font-size:10.5px;letter-spacing:.2em;color:var(--muted);gap:9px}
+.eyebrow::before{width:16px;height:1px;background:var(--green)}
+.hero .eyebrow{color:var(--gold)}
+
+/* ---- 4. fewer boxes ------------------------------------------ */
+.role{box-shadow:none;background:transparent;color:var(--muted);padding:6px 0;
+  margin-right:16px}
+.rolebar{gap:0}
+/* The old grid drew its dividers with a 1px gap over a filled container —
+   clever, but the moment the cells went transparent for this pass that fill
+   became a big green box. Dividers are now a border on each item and the
+   container has no background at all. */
+.press{background:none;border:0;gap:0 clamp(24px,4vw,56px)}
+.press > div{background:transparent;box-shadow:none;min-height:0;
+  padding:18px 0 26px;border-top:1px solid var(--line);display:block}
+/* `.press div` matches .who and .what too — they're divs — so the original
+   112px min-height was being applied to every single line of text inside a
+   cell, not just the cell. Three times the height for no reason. */
+/* `.press div` matches .who and .what too — they're divs — so the cell's
+   112px min-height, 20px/18px padding and flex column were all being applied
+   a second time to every line of text inside it. That's where the 275px-tall
+   rows came from. Reset the inner two explicitly. */
+.press .who,.press .what{min-height:0;padding:0;display:block;background:none}
+.press .who{font-size:16px;line-height:1.25;margin:0 0 6px}
+.press .what{margin:0;font-size:10.5px}
+.slip{opacity:.3}
+
+/* ---- 5. the CTA: float and glow ------------------------------
+   Only the primary green button moves. A ghost button that floated
+   too would turn the hero into a bouncy castle.
+   The glow is a box-shadow on a pseudo-element rather than the
+   button itself, so the blur is composited and never re-lays-out
+   the row of buttons around it. */
+.btn{position:relative;transition:transform .22s cubic-bezier(.22,1,.36,1),
+  background .18s ease,box-shadow .22s ease}
+.nav .btn{animation:none}
+.btn:not(.ghost){animation:lift 4.6s ease-in-out infinite;
+  box-shadow:0 0 0 0 rgba(39,162,78,0),0 10px 26px -14px rgba(39,162,78,.85)}
+.btn:not(.ghost)::after{content:"";position:absolute;inset:-2px;z-index:-1;
+  background:inherit;filter:blur(13px);opacity:.42;
+  transition:opacity .22s ease;pointer-events:none}
+.btn:not(.ghost):hover{transform:translateY(-3px);animation-play-state:paused}
+.btn:not(.ghost):hover::after{opacity:.72}
+.btn.gold{box-shadow:0 10px 26px -14px rgba(224,162,43,.9)}
+@keyframes lift{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}}
+
+/* ---- 6. scroll reveals ---------------------------------------
+   Transform + opacity only, so each one runs on the compositor and
+   costs nothing on the main thread. .seen is added once by the
+   observer in app.js and never removed — nothing re-animates on the
+   way back up, which is the thing that makes reveal effects
+   obnoxious. No-JS and reduced-motion both fall through to visible. */
+.rise{opacity:0;transform:translate3d(0,22px,0);
+  transition:opacity .62s cubic-bezier(.22,1,.36,1),
+             transform .62s cubic-bezier(.22,1,.36,1)}
+.rise.seen{opacity:1;transform:none}
+.rise:nth-child(2){transition-delay:.06s}
+.rise:nth-child(3){transition-delay:.12s}
+.rise:nth-child(4){transition-delay:.18s}
+
+/* ---- 7. performance -------------------------------------------
+   Transitioning backdrop-filter forces the compositor to re-blur the
+   whole strip behind the bar on every frame for 300ms, starting the
+   moment you scroll — this was the main source of the choppiness.
+   The blur still appears, it just snaps instead of animating.
+   The player's blur is dropped entirely: over a near-black page it
+   was invisible and cost a full-width backdrop snapshot per frame. */
+.nav{transition:background .3s ease,border-color .3s ease}
+.player{backdrop-filter:none;-webkit-backdrop-filter:none;
+  background:rgba(10,12,9,.97)}
+/* A filtered, full-viewport iframe gets its own compositor layer so
+   scrolling past it doesn't re-run the filter. */
+.hero-video{contain:layout paint;will-change:opacity}
+.hero-video iframe{transform:translate3d(-50%,-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  .btn:not(.ghost){animation:none}
+  .rise{opacity:1;transform:none;transition:none}
+}
+
+/* ---- 8. stop filtering live video ------------------------------
+   contrast/saturate/brightness on the hero iframe meant the GPU
+   re-filtered a full-viewport moving video texture every frame it
+   painted. The still image keeps its filter — that's paid once — but
+   the video now gets the same darkening from a flat scrim layered
+   over it, which costs nothing. brightness(.62) is worth roughly a
+   38% black overlay, so the look holds. */
+.hero-video iframe{filter:none}
+.hero-bg::after{background:
+  linear-gradient(to top,var(--ink) 1%,rgba(10,12,9,.86) 38%,rgba(10,12,9,.3) 78%),
+  linear-gradient(to right,rgba(10,12,9,.96) 0%,rgba(10,12,9,.9) 34%,rgba(10,12,9,.12) 78%),
+  linear-gradient(rgba(10,12,9,.40),rgba(10,12,9,.40))}
