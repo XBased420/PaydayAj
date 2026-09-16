@@ -591,3 +591,12 @@ img{height:auto}
 /* Parked by the observer in app.js once the hero scrolls away — the
    bills keep their positions, they just stop costing a repaint. */
 .rain-off .rain{animation-play-state:paused}
+
+/* ---- 10. crop the portrait to the face -------------------------
+   pr-pimpinken.jpg is 676x845 — a tall portrait dropped into a 16:9
+   box. object-fit:cover keeps the middle band by default, and on this
+   frame the middle is his jacket: the crop line lands across his chin.
+   Pulling the focal point up to 6% keeps the face in frame.
+   Any portrait source added to this row later will need the same
+   treatment; landscape sources crop sideways and are fine as-is. */
+.film img[src$="pr-pimpinken.jpg"]{object-position:50% 6%}
