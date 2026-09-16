@@ -470,3 +470,21 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     nav.classList.toggle('stuck', !e[0].isIntersecting);
   }).observe(mark);
 })();
+
+/* ================================================================
+   Park the money when nobody's looking at it
+   The falling bills are a paint animation — cheap, but not free, and
+   there is no reason to pay for it while someone is reading the
+   booking form eight screens down. Once the hero leaves the viewport
+   the animation is parked; it resumes the moment it comes back.
+   ================================================================ */
+(function () {
+  'use strict';
+  var hero = document.querySelector('.hero');
+  if (!hero || !('IntersectionObserver' in window)) return;
+  if (!document.querySelector('.rain')) return;
+
+  new IntersectionObserver(function (e) {
+    document.documentElement.classList.toggle('rain-off', !e[0].isIntersecting);
+  }, { threshold: 0 }).observe(hero);
+})();
