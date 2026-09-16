@@ -129,7 +129,7 @@ h1 .out{color:transparent;-webkit-text-stroke:2px var(--gold);paint-order:stroke
 .pd{position:relative;display:inline-block;isolation:isolate}
 .rain{position:absolute;left:0;top:0;font:inherit;letter-spacing:inherit;
   color:transparent;-webkit-background-clip:text;background-clip:text;
-  background-repeat:no-repeat;pointer-events:none;user-select:none;
+  pointer-events:none;user-select:none;
   -webkit-user-select:none;contain:paint;white-space:nowrap;
   /* Straight alpha over a cream letter just washes the bills out to pale
      mint. Multiplying lets the green and gold sink INTO the letterform
@@ -137,38 +137,46 @@ h1 .out{color:transparent;-webkit-text-stroke:2px var(--gold);paint-order:stroke
      than a smudge — and the letter stays legible because multiply can
      only darken, never lift contrast. */
   mix-blend-mode:multiply}
-.r1{opacity:.92;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
-  background-size:0.3em 0.145em,0.25em 0.12em,0.33em 0.16em;animation:fall-r1 9.5s linear -1.2s infinite}
+.r1{opacity:.95;background-repeat:repeat-y;
+  background-image:radial-gradient(ellipse 24% 4.58% at 44% 10.83%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.67%,rgba(120,166,121,.92) 1.67% 3.96%,rgba(194,211,180,.90) 3.96% 8.33%,rgba(213,197,148,.88) 8.33% 11.87%,rgba(190,208,177,.90) 11.87% 16.87%,rgba(120,166,121,.92) 16.87% 19.17%,rgba(18,64,38,.96) 19.17% 20.83%,rgba(0,0,0,0) 20.83% 100%),radial-gradient(ellipse 24% 4.58% at 44% 10.83%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.67%,rgba(120,166,121,.92) 1.67% 3.96%,rgba(194,211,180,.90) 3.96% 8.33%,rgba(213,197,148,.88) 8.33% 11.88%,rgba(190,208,177,.90) 11.88% 16.88%,rgba(120,166,121,.92) 16.88% 19.17%,rgba(18,64,38,.96) 19.17% 20.84%,rgba(0,0,0,0) 20.84% 100%),radial-gradient(ellipse 24% 4.58% at 44% 10.83%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.67%,rgba(120,166,121,.92) 1.67% 3.96%,rgba(194,211,180,.90) 3.96% 8.33%,rgba(213,197,148,.88) 8.33% 11.87%,rgba(190,208,177,.90) 11.87% 16.87%,rgba(120,166,121,.92) 16.87% 19.17%,rgba(18,64,38,.96) 19.17% 20.83%,rgba(0,0,0,0) 20.83% 100%),radial-gradient(ellipse 24% 4.58% at 44% 10.83%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.67%,rgba(120,166,121,.92) 1.67% 3.96%,rgba(194,211,180,.90) 3.96% 8.33%,rgba(213,197,148,.88) 8.33% 11.87%,rgba(190,208,177,.90) 11.87% 16.87%,rgba(120,166,121,.92) 16.87% 19.17%,rgba(18,64,38,.96) 19.17% 20.83%,rgba(0,0,0,0) 20.83% 100%);
+  background-size:0.213em 0.4296em,0.213em 0.4296em,0.217em 0.4376em,0.217em 0.4376em,0.291em 0.5869em,0.291em 0.5869em,0.279em 0.5627em,0.279em 0.5627em;
+  animation:fall-r1 3.9s linear -0.7s infinite}
 @keyframes fall-r1{
-  0%{background-position:calc(6% + 0.00%) -22.0%,calc(45% + 0.00%) -34.0%,calc(77% + 0.00%) -15.0%}
-  25%{background-position:calc(6% + -1.10%) 15.5%,calc(45% + -1.10%) 9.5%,calc(77% + -1.10%) 19.0%}
-  50%{background-position:calc(6% + 1.40%) 53.0%,calc(45% + 1.40%) 53.0%,calc(77% + 1.40%) 53.0%}
-  75%{background-position:calc(6% + -0.70%) 90.5%,calc(45% + -0.70%) 96.5%,calc(77% + -0.70%) 87.0%}
-  100%{background-position:calc(6% + 0.00%) 128.0%,calc(45% + 0.00%) 140.0%,calc(77% + 0.00%) 121.0%}}
-.r2{opacity:.72;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
-  background-size:0.22em 0.105em,0.28em 0.135em,0.2em 0.095em;animation:fall-r2 12.5s linear -6.4s infinite}
+  0%{background-position:calc(-4.8% + 0.00%) 0.1688em,calc(-4.8% + 0.00%) 0.1688em,calc(37.3% + 0.00%) 0.0490em,calc(37.3% + 0.00%) 0.0490em,calc(61.4% + 0.00%) 0.0863em,calc(61.4% + 0.00%) 0.0863em,calc(100.9% + 0.00%) 0.0771em,calc(100.9% + 0.00%) 0.0771em}
+  25%{background-position:calc(-4.8% + -1.20%) 0.2762em,calc(-4.8% + -1.20%) 0.2762em,calc(37.3% + -1.20%) 0.1584em,calc(37.3% + -1.20%) 0.1584em,calc(61.4% + -1.20%) 0.2330em,calc(61.4% + -1.20%) 0.2330em,calc(100.9% + -1.20%) 0.2178em,calc(100.9% + -1.20%) 0.2178em}
+  50%{background-position:calc(-4.8% + 1.50%) 0.3836em,calc(-4.8% + 1.50%) 0.3836em,calc(37.3% + 1.50%) 0.2678em,calc(37.3% + 1.50%) 0.2678em,calc(61.4% + 1.50%) 0.3797em,calc(61.4% + 1.50%) 0.3797em,calc(100.9% + 1.50%) 0.3584em,calc(100.9% + 1.50%) 0.3584em}
+  75%{background-position:calc(-4.8% + -0.70%) 0.4910em,calc(-4.8% + -0.70%) 0.4910em,calc(37.3% + -0.70%) 0.3772em,calc(37.3% + -0.70%) 0.3772em,calc(61.4% + -0.70%) 0.5264em,calc(61.4% + -0.70%) 0.5264em,calc(100.9% + -0.70%) 0.4991em,calc(100.9% + -0.70%) 0.4991em}
+  100%{background-position:calc(-4.8% + 0.00%) 0.5984em,calc(-4.8% + 0.00%) 0.5984em,calc(37.3% + 0.00%) 0.4866em,calc(37.3% + 0.00%) 0.4866em,calc(61.4% + 0.00%) 0.6732em,calc(61.4% + 0.00%) 0.6732em,calc(100.9% + 0.00%) 0.6398em,calc(100.9% + 0.00%) 0.6398em}}
+.r2{opacity:.76;background-repeat:repeat-y;
+  background-image:radial-gradient(ellipse 24% 4.23% at 44% 10.00%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.54%,rgba(120,166,121,.92) 1.54% 3.65%,rgba(194,211,180,.90) 3.65% 7.69%,rgba(213,197,148,.88) 7.69% 10.96%,rgba(190,208,177,.90) 10.96% 15.58%,rgba(120,166,121,.92) 15.58% 17.69%,rgba(18,64,38,.96) 17.69% 19.23%,rgba(0,0,0,0) 19.23% 100%),radial-gradient(ellipse 24% 4.23% at 44% 10.00%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.54%,rgba(120,166,121,.92) 1.54% 3.65%,rgba(194,211,180,.90) 3.65% 7.69%,rgba(213,197,148,.88) 7.69% 10.96%,rgba(190,208,177,.90) 10.96% 15.58%,rgba(120,166,121,.92) 15.58% 17.69%,rgba(18,64,38,.96) 17.69% 19.23%,rgba(0,0,0,0) 19.23% 100%),radial-gradient(ellipse 24% 4.23% at 44% 10.00%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.54%,rgba(120,166,121,.92) 1.54% 3.65%,rgba(194,211,180,.90) 3.65% 7.69%,rgba(213,197,148,.88) 7.69% 10.96%,rgba(190,208,177,.90) 10.96% 15.58%,rgba(120,166,121,.92) 15.58% 17.69%,rgba(18,64,38,.96) 17.69% 19.23%,rgba(0,0,0,0) 19.23% 100%),radial-gradient(ellipse 24% 4.23% at 44% 10.00%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.54%,rgba(120,166,121,.92) 1.54% 3.65%,rgba(194,211,180,.90) 3.65% 7.69%,rgba(213,197,148,.88) 7.69% 10.96%,rgba(190,208,177,.90) 10.96% 15.58%,rgba(120,166,121,.92) 15.58% 17.69%,rgba(18,64,38,.96) 17.69% 19.23%,rgba(0,0,0,0) 19.23% 100%);
+  background-size:0.254em 0.555em,0.254em 0.555em,0.211em 0.461em,0.211em 0.461em,0.248em 0.5418em,0.248em 0.5418em,0.244em 0.5331em,0.244em 0.5331em;
+  animation:fall-r2 5.1s linear -2.8s infinite}
 @keyframes fall-r2{
-  0%{background-position:calc(23% + 0.00%) -28.0%,calc(61% + 0.00%) -18.0%,calc(90% + 0.00%) -40.0%}
-  25%{background-position:calc(23% + -1.10%) 12.0%,calc(61% + -1.10%) 17.5%,calc(90% + -1.10%) 6.5%}
-  50%{background-position:calc(23% + 1.40%) 52.0%,calc(61% + 1.40%) 53.0%,calc(90% + 1.40%) 53.0%}
-  75%{background-position:calc(23% + -0.70%) 92.0%,calc(61% + -0.70%) 88.5%,calc(90% + -0.70%) 99.5%}
-  100%{background-position:calc(23% + 0.00%) 132.0%,calc(61% + 0.00%) 124.0%,calc(90% + 0.00%) 146.0%}}
-.r3{opacity:.54;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
-  background-size:0.19em 0.09em,0.33em 0.16em,0.24em 0.115em;animation:fall-r3 15.5s linear -3.1s infinite}
+  0%{background-position:calc(3.6% + 0.00%) 0.2292em,calc(3.6% + 0.00%) 0.2292em,calc(42.3% + 0.00%) 0.0092em,calc(42.3% + 0.00%) 0.0092em,calc(72.7% + 0.00%) 0.1073em,calc(72.7% + 0.00%) 0.1073em,calc(94.3% + 0.00%) 0.5091em,calc(94.3% + 0.00%) 0.5091em}
+  25%{background-position:calc(3.6% + -1.20%) 0.3680em,calc(3.6% + -1.20%) 0.3680em,calc(42.3% + -1.20%) 0.1245em,calc(42.3% + -1.20%) 0.1245em,calc(72.7% + -1.20%) 0.2427em,calc(72.7% + -1.20%) 0.2427em,calc(94.3% + -1.20%) 0.6424em,calc(94.3% + -1.20%) 0.6424em}
+  50%{background-position:calc(3.6% + 1.50%) 0.5067em,calc(3.6% + 1.50%) 0.5067em,calc(42.3% + 1.50%) 0.2397em,calc(42.3% + 1.50%) 0.2397em,calc(72.7% + 1.50%) 0.3782em,calc(72.7% + 1.50%) 0.3782em,calc(94.3% + 1.50%) 0.7757em,calc(94.3% + 1.50%) 0.7757em}
+  75%{background-position:calc(3.6% + -0.70%) 0.6455em,calc(3.6% + -0.70%) 0.6455em,calc(42.3% + -0.70%) 0.3550em,calc(42.3% + -0.70%) 0.3550em,calc(72.7% + -0.70%) 0.5136em,calc(72.7% + -0.70%) 0.5136em,calc(94.3% + -0.70%) 0.9089em,calc(94.3% + -0.70%) 0.9089em}
+  100%{background-position:calc(3.6% + 0.00%) 0.7842em,calc(3.6% + 0.00%) 0.7842em,calc(42.3% + 0.00%) 0.4702em,calc(42.3% + 0.00%) 0.4702em,calc(72.7% + 0.00%) 0.6491em,calc(72.7% + 0.00%) 0.6491em,calc(94.3% + 0.00%) 1.0422em,calc(94.3% + 0.00%) 1.0422em}}
+.r3{opacity:.54;background-repeat:repeat-y;
+  background-image:linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.43%,rgba(120,166,121,.92) 1.43% 3.39%,rgba(194,211,180,.90) 3.39% 7.14%,rgba(213,197,148,.88) 7.14% 10.18%,rgba(190,208,177,.90) 10.18% 14.46%,rgba(120,166,121,.92) 14.46% 16.43%,rgba(18,64,38,.96) 16.43% 17.86%,rgba(0,0,0,0) 17.86% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.43%,rgba(120,166,121,.92) 1.43% 3.39%,rgba(194,211,180,.90) 3.39% 7.14%,rgba(213,197,148,.88) 7.14% 10.18%,rgba(190,208,177,.90) 10.18% 14.46%,rgba(120,166,121,.92) 14.46% 16.43%,rgba(18,64,38,.96) 16.43% 17.86%,rgba(0,0,0,0) 17.86% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.43%,rgba(120,166,121,.92) 1.43% 3.39%,rgba(194,211,180,.90) 3.39% 7.14%,rgba(213,197,148,.88) 7.14% 10.18%,rgba(190,208,177,.90) 10.18% 14.46%,rgba(120,166,121,.92) 14.46% 16.43%,rgba(18,64,38,.96) 16.43% 17.86%,rgba(0,0,0,0) 17.86% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.43%,rgba(120,166,121,.92) 1.43% 3.39%,rgba(194,211,180,.90) 3.39% 7.14%,rgba(213,197,148,.88) 7.14% 10.18%,rgba(190,208,177,.90) 10.18% 14.46%,rgba(120,166,121,.92) 14.46% 16.43%,rgba(18,64,38,.96) 16.43% 17.86%,rgba(0,0,0,0) 17.86% 100%);
+  background-size:0.226em 0.5318em,0.314em 0.7388em,0.224em 0.5271em,0.204em 0.48em;
+  animation:fall-r3 6.8s linear -1.5s infinite}
 @keyframes fall-r3{
-  0%{background-position:calc(14% + 0.00%) -36.0%,calc(52% + 0.00%) -21.0%,calc(83% + 0.00%) -30.0%}
-  25%{background-position:calc(14% + -1.10%) 7.5%,calc(52% + -1.10%) 16.0%,calc(83% + -1.10%) 11.0%}
-  50%{background-position:calc(14% + 1.40%) 51.0%,calc(52% + 1.40%) 53.0%,calc(83% + 1.40%) 52.0%}
-  75%{background-position:calc(14% + -0.70%) 94.5%,calc(52% + -0.70%) 90.0%,calc(83% + -0.70%) 93.0%}
-  100%{background-position:calc(14% + 0.00%) 138.0%,calc(52% + 0.00%) 127.0%,calc(83% + 0.00%) 134.0%}}
-.r4{opacity:.38;background-image:linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%),linear-gradient(161deg,rgba(255,255,255,0) 0 3%,rgba(16,92,43,.98) 3% 13%,rgba(48,170,89,.96) 13% 40%,rgba(233,175,62,1) 40% 59%,rgba(41,152,78,.94) 59% 87%,rgba(16,92,43,.98) 87% 97%,rgba(255,255,255,0) 97% 100%);
-  background-size:0.26em 0.125em,0.21em 0.1em,0.29em 0.14em;animation:fall-r4 19s linear -9.7s infinite}
+  0%{background-position:calc(-1.6% + 0.00%) 0.3111em,calc(35.1% + 0.00%) 0.6199em,calc(63.4% + 0.00%) 0.4407em,calc(104.8% + 0.00%) 0.3528em}
+  25%{background-position:calc(-1.6% + -1.20%) 0.4441em,calc(35.1% + -1.20%) 0.8046em,calc(63.4% + -1.20%) 0.5724em,calc(104.8% + -1.20%) 0.4728em}
+  50%{background-position:calc(-1.6% + 1.50%) 0.5770em,calc(35.1% + 1.50%) 0.9893em,calc(63.4% + 1.50%) 0.7042em,calc(104.8% + 1.50%) 0.5928em}
+  75%{background-position:calc(-1.6% + -0.70%) 0.7100em,calc(35.1% + -0.70%) 1.1740em,calc(63.4% + -0.70%) 0.8360em,calc(104.8% + -0.70%) 0.7128em}
+  100%{background-position:calc(-1.6% + 0.00%) 0.8429em,calc(35.1% + 0.00%) 1.3587em,calc(63.4% + 0.00%) 0.9678em,calc(104.8% + 0.00%) 0.8328em}}
+.r4{opacity:.38;background-repeat:repeat-y;
+  background-image:linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.33%,rgba(120,166,121,.92) 1.33% 3.17%,rgba(194,211,180,.90) 3.17% 6.67%,rgba(213,197,148,.88) 6.67% 9.50%,rgba(190,208,177,.90) 9.50% 13.50%,rgba(120,166,121,.92) 13.50% 15.33%,rgba(18,64,38,.96) 15.33% 16.67%,rgba(0,0,0,0) 16.67% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.33%,rgba(120,166,121,.92) 1.33% 3.17%,rgba(194,211,180,.90) 3.17% 6.67%,rgba(213,197,148,.88) 6.67% 9.50%,rgba(190,208,177,.90) 9.50% 13.50%,rgba(120,166,121,.92) 13.50% 15.33%,rgba(18,64,38,.96) 15.33% 16.67%,rgba(0,0,0,0) 16.67% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 1.33%,rgba(120,166,121,.92) 1.33% 3.17%,rgba(194,211,180,.90) 3.17% 6.67%,rgba(213,197,148,.88) 6.67% 9.50%,rgba(190,208,177,.90) 9.50% 13.50%,rgba(120,166,121,.92) 13.50% 15.33%,rgba(18,64,38,.96) 15.33% 16.67%,rgba(0,0,0,0) 16.67% 100%);
+  background-size:0.278em 0.7008em,0.288em 0.7261em,0.226em 0.5697em;
+  animation:fall-r4 8.7s linear -4.6s infinite}
 @keyframes fall-r4{
-  0%{background-position:calc(32% + 0.00%) -25.0%,calc(69% + 0.00%) -38.0%,calc(96% + 0.00%) -17.0%}
-  25%{background-position:calc(32% + -1.10%) 13.8%,calc(69% + -1.10%) 7.0%,calc(96% + -1.10%) 18.0%}
-  50%{background-position:calc(32% + 1.40%) 52.5%,calc(69% + 1.40%) 52.0%,calc(96% + 1.40%) 53.0%}
-  75%{background-position:calc(32% + -0.70%) 91.2%,calc(69% + -0.70%) 97.0%,calc(96% + -0.70%) 88.0%}
-  100%{background-position:calc(32% + 0.00%) 130.0%,calc(69% + 0.00%) 142.0%,calc(96% + 0.00%) 123.0%}}
+  0%{background-position:calc(8.9% + 0.00%) 0.1528em,calc(54.7% + 0.00%) 0.1409em,calc(99.3% + 0.00%) 0.0234em}
+  25%{background-position:calc(8.9% + -1.20%) 0.3280em,calc(54.7% + -1.20%) 0.3224em,calc(99.3% + -1.20%) 0.1658em}
+  50%{background-position:calc(8.9% + 1.50%) 0.5032em,calc(54.7% + 1.50%) 0.5039em,calc(99.3% + 1.50%) 0.3082em}
+  75%{background-position:calc(8.9% + -0.70%) 0.6784em,calc(54.7% + -0.70%) 0.6854em,calc(99.3% + -0.70%) 0.4506em}
+  100%{background-position:calc(8.9% + 0.00%) 0.8536em,calc(54.7% + 0.00%) 0.8670em,calc(99.3% + 0.00%) 0.5931em}}
 @media (prefers-reduced-motion:reduce){.rain{display:none}}
 
 /* ---------- sections ---------- */
@@ -578,3 +586,18 @@ body{padding-bottom:78px}
   linear-gradient(to top,var(--ink) 1%,rgba(10,12,9,.86) 38%,rgba(10,12,9,.3) 78%),
   linear-gradient(to right,rgba(10,12,9,.96) 0%,rgba(10,12,9,.9) 34%,rgba(10,12,9,.12) 78%),
   linear-gradient(rgba(10,12,9,.40),rgba(10,12,9,.40))}
+
+/* ---- 9. aspect ratios ------------------------------------------
+   Regression from the last pass: adding width/height attributes to
+   every image fixed the layout shift, but an HTML height attribute
+   sets the CSS height property. With .cover img at width:100% the
+   browser was drawing an 800px-tall box at ~700px wide — a square
+   album cover stretched into a portrait. Same on the film stills,
+   where the explicit height also cancelled their aspect-ratio rule.
+   height:auto hands the ratio back to the intrinsic size. The four
+   rules that set a height deliberately (avatar, hero, thumbnails,
+   photo stack) all out-specify this and are unaffected. */
+img{height:auto}
+/* Parked by the observer in app.js once the hero scrolls away — the
+   bills keep their positions, they just stop costing a repaint. */
+.rain-off .rain{animation-play-state:paused}
