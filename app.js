@@ -105,7 +105,9 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   function onScroll() {
     nav.classList.toggle('stuck', window.scrollY > 40);
   }
-  addEventListener('scroll', onScroll, { passive: true });
+  // The observer-based version further down does this without listening
+  // to every scroll event; this one only covers browsers without it.
+  if (!('IntersectionObserver' in window)) addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
 
@@ -169,6 +171,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
       f.setAttribute('frameborder', '0');
       f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true;
+      btn._thumb = btn.innerHTML;          // kept so the bill stack can put it back
       btn.innerHTML = '';
       btn.appendChild(f);
       card.classList.add('playing');
@@ -433,6 +436,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     'section .sechead, .vid, .press > div, .about > div, ' +
     '.film, .photostack, .bookgrid > *, .album > *'
   );
+  targets = [].filter.call(targets, function (el) { return !el.closest('.bill'); });
   if (!targets.length) return;
 
   var io = new IntersectionObserver(function (entries) {
@@ -487,4 +491,247 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   new IntersectionObserver(function (e) {
     document.documentElement.classList.toggle('rain-off', !e[0].isIntersecting);
   }, { threshold: 0 }).observe(hero);
+})();
+
+
+/* ================================================================
+   Bill stack — thumbing through hundreds
+   Every section after booking is a bill in one pinned stack. Each
+   360px of scroll thumbs the top bill off: its corner peels up and
+   folds over (showing the back of the note), then the whole bill
+   lifts over its top edge and is gone, and the stack slides up.
+
+   Works on phones too: the phone layouts in styles.css are built to
+   fit one card, and fit() below scales a bill's contents down a touch
+   if a short screen still can't hold them. The only fallback — plain
+   sections, no pinning — is for people who've asked their device to
+   reduce motion.
+   ================================================================ */
+(function () {
+  'use strict';
+
+  var stack = document.querySelector('.stack');
+  if (!stack) return;
+  var stage = stack.querySelector('.stack-stage');
+  var bills = [].slice.call(stack.querySelectorAll('.bill'));
+  if (!stage || bills.length < 2) return;
+
+  var root = document.documentElement;
+  var PER = 360;                                   // px of scroll per bill
+  var JIT = [0, -0.9, 1.1, -0.7, 0.8, -0.5, 0.6, -0.8];
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  var on = false, start = 0, W = 0, H = 0, ticking = false, top = -1, lastZone = null;
+
+  var parts = bills.map(function (b) {
+    return {
+      el: b,
+      front: b.querySelector('.bill-front'),
+      body:  b.querySelector('.bill-body'),
+      shine: b.querySelector('.bill-shine'),
+      shade: b.querySelector('.bill-shade'),
+      wrap:  b.querySelector('.bill-flapwrap'),
+      flap:  b.querySelector('.bill-flap'),
+      fshade: b.querySelector('.bill-flapshade'),
+      memo: {}
+    };
+  });
+
+  // Only touch the DOM when a value actually changes — most bills are
+  // standing still on most frames.
+  function put(part, key, el, prop, val) {
+    if (part.memo[key] === val) return;
+    part.memo[key] = val;
+    el.style[prop] = val;
+  }
+
+  function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+  function ease(x) { x = clamp(x); return x * x * (3 - 2 * x); }
+
+  /* The corner peel. The fold line cuts the bottom-right corner; the
+     front is clipped along it and the cut-off triangle is mirrored
+     across the line and drawn as the back of the note lying on top. */
+  function peel(p) {
+    if (p <= 0.001) return null;
+    var a = p * W * 0.557, b = p * H * 0.758;
+    var p1x = W - a, p1y = H, p2x = W, p2y = H - b;
+    var dx = p2x - p1x, dy = p2y - p1y, vx = W - p1x, vy = H - p1y;
+    var k = (vx * dx + vy * dy) / (dx * dx + dy * dy);
+    var cx = p1x + 2 * k * dx - vx, cy = p1y + 2 * k * dy - vy;
+    var mx = (p1x + p2x) / 2, my = (p1y + p2y) / 2;
+    var th = Math.atan2(cx - mx, -(cy - my)), sn = Math.sin(th), cs = Math.cos(th);
+    var L = Math.abs(W * sn) + Math.abs(H * cs);
+    function at(x, y) { return (((x - W / 2) * sn - (y - H / 2) * cs) / L + 0.5) * 100; }
+    var t0 = at(mx, my), t1 = at(cx, cy);
+    function stop(f) { return (t0 + (t1 - t0) * f).toFixed(2) + '%'; }
+    function pt(x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; }
+    return {
+      front: 'polygon(0px 0px, ' + pt(W, 0) + ', ' + pt(p2x, p2y) + ', ' + pt(p1x, p1y) + ', ' + pt(0, H) + ')',
+      flap:  'polygon(' + pt(p1x, p1y) + ', ' + pt(p2x, p2y) + ', ' + pt(cx, cy) + ')',
+      shade: 'linear-gradient(' + (th * 180 / Math.PI).toFixed(2) + 'deg, rgba(0,0,0,.62) ' + stop(0) +
+             ', rgba(255,255,255,.09) ' + stop(0.28) + ', rgba(0,0,0,.04) ' + stop(0.7) +
+             ', rgba(0,0,0,.38) ' + stop(1) + ')'
+    };
+  }
+
+  function resetVideo(part) {
+    var v = part.el.querySelector('.vid.playing');
+    if (!v) return;
+    var btn = v.querySelector('.vthumb');
+    if (btn && btn._thumb != null) btn.innerHTML = btn._thumb;
+    v.classList.remove('playing');
+  }
+
+  function frame() {
+    ticking = false;
+    if (!on) return;
+    var t = (window.scrollY - start) / PER;
+    var n = parts.length, f = [], F = 0, i;
+    var zone = t < -3 ? -1 : t > n + 2 ? 1 : 0;
+    if (zone !== 0 && zone === lastZone) return;
+    lastZone = zone;
+    for (i = 0; i < n; i++) {
+      // the last bill never leaves; each other one rests briefly, then flicks
+      f[i] = i < n - 1 ? ease((t - i - 0.08) / 0.84) : 0;
+      F += f[i];
+    }
+    var newTop = Math.min(n - 1, Math.round(F));
+    for (i = 0; i < n; i++) {
+      var P = parts[i], fk = f[i], D = Math.max(0, i - F);
+      var tf, op = '1', z, vis = 'visible', shine = '0', shade = '0', g = null, spos = 'translateX(0%)';
+      if (fk >= 1 || D > 2.6) {
+        vis = 'hidden'; tf = 'none'; z = '0';
+        if (fk >= 1) resetVideo(P);
+      } else if (fk > 0) {
+        var pe = ease(fk / 0.45), r = ease((fk - 0.3) / 0.7);
+        g = peel(pe);
+        z = '50';
+        tf = 'translate(' + (r * 70).toFixed(1) + 'px,' + (-r * 50).toFixed(1) + 'px) rotateX(' +
+             (r * 96).toFixed(2) + 'deg) rotateZ(' + (-r * 9).toFixed(2) + 'deg)';
+        op = (r > 0.72 ? 1 - (r - 0.72) / 0.28 : 1).toFixed(3);
+        shine = Math.sin(Math.PI * r).toFixed(3);
+        spos = 'translateX(' + (r * 66.7).toFixed(2) + '%)';
+        shade = (r * 0.55).toFixed(3);
+        if (fk > 0.5) resetVideo(P);
+      } else {
+        var d = Math.min(D, 2.6), step = W < 700 ? 7 : 13;
+        z = String(40 - i);
+        tf = 'translateY(' + (d * step).toFixed(1) + 'px) scale(' + (1 - d * 0.028).toFixed(4) +
+             ') rotateZ(' + (JIT[i % JIT.length] * Math.min(d, 1)).toFixed(2) + 'deg)';
+        shade = (Math.min(d, 3) * 0.2 + 0.35 * clamp(D)).toFixed(3);
+      }
+      put(P, 'vis', P.el, 'display', vis === 'hidden' ? 'none' : '');
+      if (vis === 'hidden') continue;             // nothing else to set on a bill nobody can see
+      put(P, 'z', P.el, 'zIndex', z);
+      put(P, 'tf', P.el, 'transform', tf);
+      put(P, 'op', P.el, 'opacity', op);
+      put(P, 'sh', P.shine, 'opacity', shine);
+      put(P, 'sp', P.shine, 'transform', spos);
+      put(P, 'sd', P.shade, 'opacity', shade);
+      put(P, 'fc', P.front, 'clipPath', g ? g.front : 'none');
+      put(P, 'fw', P.wrap, 'visibility', g ? 'visible' : 'hidden');
+      if (g) {
+        put(P, 'fl', P.flap, 'clipPath', g.flap);
+        put(P, 'fs', P.fshade, 'background', g.shade);
+      }
+    }
+    top = newTop;
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+  }
+
+  // Fit each bill's contents to its card. The phone layouts already fit a
+  // normal phone; this only kicks in on short screens, and only shrinks.
+  function fit() {
+    parts.forEach(function (P) {
+      var f = 1;
+      P.body.style.setProperty('--fit', '1');
+      for (var pass = 0; pass < 4; pass++) {
+        // measure the content itself plus the bottom padding it has to
+        // stay clear of — scrollHeight alone ignores that padding
+        var kids = P.body.children, bottom = 0;
+        for (var c = 0; c < kids.length; c++) bottom = Math.max(bottom, kids[c].offsetTop + kids[c].offsetHeight);
+        var need = bottom + parseFloat(getComputedStyle(P.body).paddingBottom), have = P.body.clientHeight;
+        if (need <= have + 1) break;
+        f = Math.max(0.6, f * (have / need) * 0.99);
+        P.body.style.setProperty('--fit', f.toFixed(4));
+      }
+    });
+  }
+
+  function clearStyles() {
+    parts.forEach(function (P) {
+      ['display', 'zIndex', 'transform', 'opacity'].forEach(function (k) { P.el.style[k] = ''; });
+      P.front.style.clipPath = ''; P.wrap.style.visibility = '';
+      P.body.style.opacity = ''; P.body.style.removeProperty('--fit');
+      P.shine.style.opacity = ''; P.shade.style.opacity = '';
+      P.memo = {};
+    });
+    stack.style.height = '';
+  }
+
+  function layout() {
+    var want = !reduce.matches;
+    if (want !== on) {
+      on = want;
+      root.classList.toggle('stack-on', on);
+      if (!on) { clearStyles(); return; }
+    }
+    if (!on) return;
+    var nav = document.querySelector('.nav'), player = document.getElementById('player');
+    root.style.setProperty('--nav-h', (nav ? nav.offsetHeight : 64) + 'px');
+    root.style.setProperty('--player-h', (player && !player.hidden ? player.offsetHeight : 0) + 'px');
+    parts.forEach(function (P) { P.memo = {}; P.el.style.display = ''; });
+    lastZone = null;
+    W = bills[0].offsetWidth; H = bills[0].offsetHeight;
+    fit();
+    stack.style.height = (stage.offsetHeight + (bills.length - 1) * PER) + 'px';
+    var navH = nav ? nav.offsetHeight : 64;
+    start = stack.getBoundingClientRect().top + window.scrollY - navH;
+    frame();
+  }
+
+  // Where to scroll so bill i is the one on top
+  function spot(i) { return Math.ceil(start + i * PER + (i ? 2 : 0)); }
+
+  // Nav links, "Watch the visuals" and any #hash that points into the
+  // stack: go to the scroll position where that bill is on top.
+  document.addEventListener('click', function (e) {
+    if (!on) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var i = bills.findIndex(function (b) { return '#' + b.id === a.getAttribute('href'); });
+    if (i < 0) return;
+    e.preventDefault();
+    window.scrollTo({ top: spot(i), behavior: 'smooth' });
+    if (history.replaceState) history.replaceState(null, '', '#' + bills[i].id);
+  });
+
+  // Keyboard users tabbing into a covered bill get taken to it.
+  stack.addEventListener('focusin', function (e) {
+    if (!on) return;
+    var i = bills.indexOf(e.target.closest('.bill'));
+    if (i >= 0 && i !== top) window.scrollTo({ top: spot(i) });
+  });
+
+  var rt;
+  function onResize() { clearTimeout(rt); rt = setTimeout(layout, 120); }
+
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onResize);
+  if (reduce.addEventListener) reduce.addEventListener('change', layout);
+
+  function init() {
+    layout();
+    // arriving on a link like /#music
+    var i = bills.findIndex(function (b) { return '#' + b.id === location.hash; });
+    if (on && i >= 0) window.scrollTo({ top: spot(i) });
+  }
+  // this script sits at the end of <body>, so the DOM is already there:
+  // lay out now, then again once images have landed
+  init();
+  if (document.readyState !== 'complete') addEventListener('load', layout);
+  // fonts and images change heights after first layout
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
 })();
