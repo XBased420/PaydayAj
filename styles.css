@@ -600,3 +600,160 @@ img{height:auto}
    Any portrait source added to this row later will need the same
    treatment; landscape sources crop sideways and are fine as-is. */
 .film img[src$="pr-pimpinken.jpg"]{object-position:50% 6%}
+
+/* ================================================================
+   THE BILL STACK
+   Every section after booking is a $100 bill. With html.stack-on (set
+   by app.js) the stage pins under the nav and scrolling thumbs the top
+   bill off to reveal the next. Without it — reduced motion, or JS off —
+   the same bills simply sit one after another.
+   Sizes on phones are designed to fit one screen; app.js also measures
+   each bill and scales its contents down a touch on very short phones,
+   so nothing ever spills out of the card.
+   ================================================================ */
+:root{--nav-h:64px;--player-h:74px}
+
+.stack{position:relative;padding:12px 0 40px}
+.bill{position:relative;width:min(1180px,calc(100% - 32px));margin:28px auto}
+
+.bill-front{position:relative;border-radius:6px;overflow:hidden;
+  background:#10140E url(assets/bill-bg.webp) center/100% 100% no-repeat;
+  box-shadow:inset 0 0 0 1px #242B21,0 24px 48px -18px rgba(0,0,0,.95)}
+/* the engraved double frame */
+.bill-front::before,.bill-front::after{content:"";position:absolute;pointer-events:none;z-index:1}
+.bill-front::before{inset:14px;border:1px solid #3B4633;border-radius:3px}
+.bill-front::after{inset:20px;border:1px solid rgba(39,162,78,.32);border-radius:2px}
+.bill-100{position:absolute;z-index:1;font-family:var(--display);font-size:30px;line-height:1;
+  letter-spacing:-.02em;color:rgba(224,162,43,.12);pointer-events:none}
+.bill-100.tl{left:36px;top:30px}
+.bill-100.br{right:36px;bottom:30px}
+.bill-serial{position:absolute;z-index:1;right:116px;top:40px;font-family:var(--mono);
+  font-size:12px;letter-spacing:.14em;color:var(--green);pointer-events:none}
+.bill-motto{position:absolute;z-index:1;left:38px;bottom:34px;font-family:var(--mono);
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.bill-seal{position:absolute;z-index:1;right:34px;top:26px;width:64px;height:64px;border-radius:50%;
+  box-sizing:border-box;border:2px solid rgba(39,162,78,.6);
+  box-shadow:inset 0 0 0 4px #10140E,inset 0 0 0 5px rgba(39,162,78,.45);
+  display:grid;place-items:center;font-family:var(--display);font-size:14px;color:var(--green);
+  background:#10140E;pointer-events:none}
+
+.bill-body{position:relative;z-index:2;box-sizing:border-box;padding:84px 72px 68px;
+  display:flex;flex-direction:column;gap:24px}
+.bill-shine,.bill-shade{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0}
+.bill-shine{background:linear-gradient(115deg,rgba(240,180,65,0) 38%,rgba(240,180,65,.16) 50%,rgba(240,180,65,0) 62%);
+  background-size:260% 100%}
+.bill-shade{background:#050604}
+/* the back of the bill, folded over the front when a corner peels */
+.bill-flapwrap{position:absolute;inset:0;z-index:4;pointer-events:none;visibility:hidden}
+.bill-flap{position:absolute;inset:0;background:#1B2418 url(assets/bill-back.webp) center/100% 100% no-repeat}
+.bill-flapshade{position:absolute;inset:0}
+
+/* ---- content inside a bill ---- */
+.bill-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.bill-head h2{margin:8px 0 0;font-size:clamp(30px,3.2vw,42px)}
+.bill-head .sub{margin:8px 0 0;font-size:14.5px}
+.bill .vid:hover{transform:none}
+.bill-vgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.bill .vbody{padding:12px 14px 14px}
+.bill .vbody h3{font-size:15px}
+.bill-album{display:grid;grid-template-columns:auto minmax(0,1fr);gap:40px;align-items:start}
+.bill-album .cover img{width:min(290px,32vh);height:auto}
+.bill .tracks{column-gap:28px}
+.bill .tracks li{padding:7px 0}
+.bill-fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bill .film .fb{padding:14px 16px}
+.bill .film p{font-size:13.5px;margin-top:6px}
+.bill-about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:stretch}
+.bill-about p{font-size:15.5px;color:#DCD9CE;margin:0 0 12px;max-width:52ch}
+.bill-about h2{font-size:clamp(30px,3.2vw,42px)}
+.bill-about .photostack{grid-template-rows:1fr 1fr;height:min(440px,52vh);min-height:0}
+.bill-about .photostack img{height:100%;min-height:0}
+.bill .press{margin:0}
+.bill .tablewrap{margin:0}
+
+/* ---- stacked mode ---- */
+html.stack-on .stack{padding:0}
+html.stack-on .stack-stage{position:sticky;top:var(--nav-h);overflow:hidden;
+  height:calc(100vh - var(--nav-h) - var(--player-h));
+  height:calc(100svh - var(--nav-h) - var(--player-h));
+  perspective:1700px;perspective-origin:50% -20%}
+html.stack-on .bill{position:absolute;left:0;right:0;top:14px;margin:0 auto;
+  width:min(1180px,calc(100% - 48px));height:calc(100% - 58px);
+  transform-origin:50% 0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  will-change:transform}
+html.stack-on .bill-front{position:absolute;inset:0}
+/* the body is scaled to fit its card when app.js says it has to */
+html.stack-on .bill-body{position:absolute;top:0;left:50%;
+  width:calc(100% / var(--fit,1));height:calc(100% / var(--fit,1));
+  transform:translateX(-50%) scale(var(--fit,1));transform-origin:50% 0}
+html.stack-on .bill-about{flex:1;min-height:0}
+html.stack-on .bill-about .photostack{height:100%}
+
+/* ---- phones: each bill laid out to fit one phone screen ---- */
+@media (max-width:699px){
+  .bill{width:calc(100% - 20px)}
+  html.stack-on .bill{width:calc(100% - 20px);top:10px;height:calc(100% - 34px)}
+  .bill-front::before{inset:8px}
+  .bill-front::after{inset:12px}
+  .bill-100{font-size:18px}
+  .bill-100.tl{left:22px;top:20px}
+  .bill-100.br{right:22px;bottom:18px}
+  .bill-serial{font-size:9.5px;right:70px;top:27px;letter-spacing:.1em}
+  .bill-motto{font-size:8.5px;left:22px;bottom:20px;letter-spacing:.14em}
+  .bill-seal{width:42px;height:42px;right:20px;top:16px;font-size:10px;
+    box-shadow:inset 0 0 0 3px #10140E,inset 0 0 0 4px rgba(39,162,78,.45)}
+  .bill-body{padding:62px 20px 44px;gap:16px}
+  .bill-head{flex-direction:column;align-items:flex-start;gap:12px}
+  .bill-head h2,.bill-about h2{font-size:27px}
+  .bill-head .sub{font-size:13px}
+  .bill-head .btn{padding:10px 16px;font-size:12px}
+  .bill-vgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .bill .vbody{padding:8px 10px 10px}
+  .bill .vbody h3{font-size:12.5px}
+  .bill .vbody p{display:none}
+  .bill .play span{width:38px;height:38px}
+  .bill-album{grid-template-columns:1fr;gap:14px}
+  .bill-album .cover img{width:112px}
+  .bill-album .badge{font-size:9px;padding:5px 8px;top:-8px;left:-8px}
+  .bill .tracks{columns:2;column-gap:16px}
+  .bill .tracks li{padding:5px 0;gap:8px;font-size:12.5px}
+  .bill .tracks .n{font-size:11px;min-width:18px}
+  .bill-fgrid{grid-template-columns:1fr;gap:10px}
+  .bill .film{display:grid;grid-template-columns:128px minmax(0,1fr);align-items:center}
+  .bill .film img{height:100%;aspect-ratio:16/9}
+  .bill .film .fb{padding:8px 12px}
+  .bill .film h3{font-size:14px}
+  .bill .film .role2{font-size:10px}
+  .bill .film p{font-size:12.5px;margin-top:4px}
+  .bill-about{grid-template-columns:1fr;gap:14px}
+  .bill-about p{font-size:14px;margin-bottom:8px}
+  .bill-about .photostack{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:1fr;height:150px;gap:8px}
+  .bill-about .photostack .tall{grid-row:auto}
+  html.stack-on .bill-about .photostack{height:150px}
+  html.stack-on .bill-about{flex:none}
+  .bill .press{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bill .press > div{padding:10px 0 14px}
+  .bill .press .who{font-size:14px}
+  .bill .press .what{font-size:9.5px}
+  .bill .shows{font-size:12px}
+  .bill .shows th,.bill .shows td{padding:8px 6px}
+}
+/* balance the content on the note instead of leaving it top-heavy */
+/* auto margins centre the content when there's room and fall back to
+   top-aligned when there isn't, so an over-tall bill overflows downward only
+   (where the fit measurement in app.js can see it), never off the top */
+html.stack-on .bill-body > :first-child{margin-top:auto}
+html.stack-on .bill-body > :last-child{margin-bottom:auto}
+/* The note texture is a pre-rendered image, not the vector original: an
+   SVG this detailed gets re-drawn every frame a bill moves, which cost
+   more than everything else in the stack put together. */
+
+/* ---- keeping the flip on the compositor ----
+   Every value the stack changes per frame is a transform or an opacity on
+   an element that has its own layer, so the GPU just moves pictures around
+   instead of repainting bills. The one exception is the corner peel's
+   clip, which only ever touches the single bill mid-flip. */
+html.stack-on .bill-shade{will-change:opacity}
+html.stack-on .bill-shine{background-size:100% 100%;left:-100%;right:auto;width:300%;
+  background:linear-gradient(105deg,rgba(240,180,65,0) 40%,rgba(240,180,65,.16) 50%,rgba(240,180,65,0) 60%);
+  will-change:transform,opacity}
