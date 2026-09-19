@@ -130,43 +130,37 @@ h1 .out{color:transparent;-webkit-text-stroke:2px var(--gold);paint-order:stroke
 .rain{position:absolute;left:0;top:0;font:inherit;letter-spacing:inherit;
   color:transparent;-webkit-background-clip:text;background-clip:text;
   pointer-events:none;user-select:none;
-  -webkit-user-select:none;contain:paint;white-space:nowrap;
-  /* Straight alpha over a cream letter just washes the bills out to pale
-     mint. Multiplying lets the green and gold sink INTO the letterform
-     instead of sitting on top of it, so it reads as printed money rather
-     than a smudge — and the letter stays legible because multiply can
-     only darken, never lift contrast. */
-  mix-blend-mode:multiply}
-.r1{opacity:.95;background-repeat:repeat-y;
-  background-image:radial-gradient(ellipse 24% 5.79% at 44% 13.68%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.11%,rgba(120,166,121,.92) 2.11% 5.00%,rgba(194,211,180,.90) 5.00% 10.53%,rgba(213,197,148,.88) 10.53% 15.00%,rgba(190,208,177,.90) 15.00% 21.32%,rgba(120,166,121,.92) 21.32% 24.21%,rgba(18,64,38,.96) 24.21% 26.32%,rgba(0,0,0,0) 26.32% 100%),radial-gradient(ellipse 24% 5.79% at 44% 13.68%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.11%,rgba(120,166,121,.92) 2.11% 5.00%,rgba(194,211,180,.90) 5.00% 10.53%,rgba(213,197,148,.88) 10.53% 15.00%,rgba(190,208,177,.90) 15.00% 21.32%,rgba(120,166,121,.92) 21.32% 24.21%,rgba(18,64,38,.96) 24.21% 26.32%,rgba(0,0,0,0) 26.32% 100%),radial-gradient(ellipse 24% 5.79% at 44% 13.68%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.11%,rgba(120,166,121,.92) 2.11% 5.00%,rgba(194,211,180,.90) 5.00% 10.53%,rgba(213,197,148,.88) 10.53% 15.00%,rgba(190,208,177,.90) 15.00% 21.31%,rgba(120,166,121,.92) 21.31% 24.21%,rgba(18,64,38,.96) 24.21% 26.31%,rgba(0,0,0,0) 26.31% 100%),radial-gradient(ellipse 24% 5.79% at 44% 13.69%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.11%,rgba(120,166,121,.92) 2.11% 5.00%,rgba(194,211,180,.90) 5.00% 10.53%,rgba(213,197,148,.88) 10.53% 15.00%,rgba(190,208,177,.90) 15.00% 21.32%,rgba(120,166,121,.92) 21.32% 24.21%,rgba(18,64,38,.96) 24.21% 26.32%,rgba(0,0,0,0) 26.32% 100%),radial-gradient(ellipse 24% 5.79% at 44% 13.69%,rgba(14,52,32,.66) 0 58%,rgba(14,52,32,.24) 66%,rgba(14,52,32,0) 72%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.11%,rgba(120,166,121,.92) 2.11% 5.00%,rgba(194,211,180,.90) 5.00% 10.53%,rgba(213,197,148,.88) 10.53% 15.00%,rgba(190,208,177,.90) 15.00% 21.32%,rgba(120,166,121,.92) 21.32% 24.21%,rgba(18,64,38,.96) 24.21% 26.32%,rgba(0,0,0,0) 26.32% 100%);
-  background-size:0.233em 0.372em,0.233em 0.372em,0.268em 0.4279em,0.268em 0.4279em,0.248em 0.396em,0.248em 0.396em,0.288em 0.4598em,0.288em 0.4598em,0.254em 0.4055em,0.254em 0.4055em;
+  -webkit-user-select:none;contain:paint;white-space:nowrap}
+.r1{opacity:.96;background-repeat:repeat-y;
+  background-image:url(assets/bill-mini-l.webp),url(assets/bill-mini.webp),url(assets/bill-mini-r.webp),url(assets/bill-mini-l.webp),url(assets/bill-mini.webp);
+  background-size:0.277em auto,0.298em auto,0.291em auto,0.335em auto,0.284em auto;
   animation:fall-r1 3.6s linear -0.7s infinite}
 @keyframes fall-r1{
-  0%{background-position:calc(9.6% + 0.00%) 0.0618em,calc(9.6% + 0.00%) 0.0618em,calc(31.2% + 0.00%) 0.2953em,calc(31.2% + 0.00%) 0.2953em,calc(50.2% + 0.00%) 0.2899em,calc(50.2% + 0.00%) 0.2899em,calc(70.2% + 0.00%) 0.3044em,calc(70.2% + 0.00%) 0.3044em,calc(91.0% + 0.00%) 0.0629em,calc(91.0% + 0.00%) 0.0629em}
-  25%{background-position:calc(9.6% + -1.10%) 0.1548em,calc(9.6% + -1.10%) 0.1548em,calc(31.2% + -1.10%) 0.4022em,calc(31.2% + -1.10%) 0.4022em,calc(50.2% + -1.10%) 0.3889em,calc(50.2% + -1.10%) 0.3889em,calc(70.2% + -1.10%) 0.4193em,calc(70.2% + -1.10%) 0.4193em,calc(91.0% + -1.10%) 0.1642em,calc(91.0% + -1.10%) 0.1642em}
-  50%{background-position:calc(9.6% + 1.40%) 0.2478em,calc(9.6% + 1.40%) 0.2478em,calc(31.2% + 1.40%) 0.5092em,calc(31.2% + 1.40%) 0.5092em,calc(50.2% + 1.40%) 0.4879em,calc(50.2% + 1.40%) 0.4879em,calc(70.2% + 1.40%) 0.5343em,calc(70.2% + 1.40%) 0.5343em,calc(91.0% + 1.40%) 0.2656em,calc(91.0% + 1.40%) 0.2656em}
-  75%{background-position:calc(9.6% + -0.60%) 0.3408em,calc(9.6% + -0.60%) 0.3408em,calc(31.2% + -0.60%) 0.6162em,calc(31.2% + -0.60%) 0.6162em,calc(50.2% + -0.60%) 0.5869em,calc(50.2% + -0.60%) 0.5869em,calc(70.2% + -0.60%) 0.6492em,calc(70.2% + -0.60%) 0.6492em,calc(91.0% + -0.60%) 0.3670em,calc(91.0% + -0.60%) 0.3670em}
-  100%{background-position:calc(9.6% + 0.00%) 0.4338em,calc(9.6% + 0.00%) 0.4338em,calc(31.2% + 0.00%) 0.7232em,calc(31.2% + 0.00%) 0.7232em,calc(50.2% + 0.00%) 0.6859em,calc(50.2% + 0.00%) 0.6859em,calc(70.2% + 0.00%) 0.7642em,calc(70.2% + 0.00%) 0.7642em,calc(91.0% + 0.00%) 0.4684em,calc(91.0% + 0.00%) 0.4684em}}
-.r2{opacity:.74;background-repeat:repeat-y;
-  background-image:linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.29%,rgba(120,166,121,.92) 2.29% 5.43%,rgba(194,211,180,.90) 5.43% 11.43%,rgba(213,197,148,.88) 11.43% 16.29%,rgba(190,208,177,.90) 16.29% 23.14%,rgba(120,166,121,.92) 23.14% 26.29%,rgba(18,64,38,.96) 26.29% 28.57%,rgba(0,0,0,0) 28.57% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.29%,rgba(120,166,121,.92) 2.29% 5.43%,rgba(194,211,180,.90) 5.43% 11.43%,rgba(213,197,148,.88) 11.43% 16.29%,rgba(190,208,177,.90) 16.29% 23.14%,rgba(120,166,121,.92) 23.14% 26.29%,rgba(18,64,38,.96) 26.29% 28.57%,rgba(0,0,0,0) 28.57% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.29%,rgba(120,166,121,.92) 2.29% 5.43%,rgba(194,211,180,.90) 5.43% 11.43%,rgba(213,197,148,.88) 11.43% 16.29%,rgba(190,208,177,.90) 16.29% 23.15%,rgba(120,166,121,.92) 23.15% 26.29%,rgba(18,64,38,.96) 26.29% 28.57%,rgba(0,0,0,0) 28.57% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.29%,rgba(120,166,121,.92) 2.29% 5.43%,rgba(194,211,180,.90) 5.43% 11.43%,rgba(213,197,148,.88) 11.43% 16.28%,rgba(190,208,177,.90) 16.28% 23.14%,rgba(120,166,121,.92) 23.14% 26.28%,rgba(18,64,38,.96) 26.28% 28.57%,rgba(0,0,0,0) 28.57% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.29%,rgba(120,166,121,.92) 2.29% 5.43%,rgba(194,211,180,.90) 5.43% 11.43%,rgba(213,197,148,.88) 11.43% 16.29%,rgba(190,208,177,.90) 16.29% 23.15%,rgba(120,166,121,.92) 23.15% 26.29%,rgba(18,64,38,.96) 26.29% 28.58%,rgba(0,0,0,0) 28.58% 100%);
-  background-size:0.282em 0.4147em,0.272em 0.4em,0.213em 0.3132em,0.232em 0.3412em,0.223em 0.3279em;
+  0%{background-position:calc(9.6% + 0.00%) 0.0763em,calc(31.2% + 0.00%) 0.3598em,calc(50.2% + 0.00%) 0.3564em,calc(70.2% + 0.00%) 0.3681em,calc(91.0% + 0.00%) 0.0770em}
+  25%{background-position:calc(9.6% + -1.10%) 0.1913em,calc(31.2% + -1.10%) 0.4902em,calc(50.2% + -1.10%) 0.4781em,calc(70.2% + -1.10%) 0.5072em,calc(91.0% + -1.10%) 0.2013em}
+  50%{background-position:calc(9.6% + 1.40%) 0.3062em,calc(31.2% + 1.40%) 0.6206em,calc(50.2% + 1.40%) 0.5999em,calc(70.2% + 1.40%) 0.6462em,calc(91.0% + 1.40%) 0.3255em}
+  75%{background-position:calc(9.6% + -0.60%) 0.4212em,calc(31.2% + -0.60%) 0.7510em,calc(50.2% + -0.60%) 0.7216em,calc(70.2% + -0.60%) 0.7852em,calc(91.0% + -0.60%) 0.4498em}
+  100%{background-position:calc(9.6% + 0.00%) 0.5361em,calc(31.2% + 0.00%) 0.8813em,calc(50.2% + 0.00%) 0.8433em,calc(70.2% + 0.00%) 0.9242em,calc(91.0% + 0.00%) 0.5740em}}
+.r2{opacity:.72;background-repeat:repeat-y;
+  background-image:url(assets/bill-mini.webp),url(assets/bill-mini-r.webp),url(assets/bill-mini-l.webp),url(assets/bill-mini.webp),url(assets/bill-mini-r.webp);
+  background-size:0.312em auto,0.316em auto,0.256em auto,0.262em auto,0.264em auto;
   animation:fall-r2 5.0s linear -2.8s infinite}
 @keyframes fall-r2{
-  0%{background-position:calc(15.6% + 0.00%) 0.0697em,calc(37.1% + 0.00%) 0.0236em,calc(57.5% + 0.00%) 0.2715em,calc(77.7% + 0.00%) 0.2477em,calc(97.4% + 0.00%) 0.2197em}
-  25%{background-position:calc(15.6% + -1.10%) 0.1733em,calc(37.1% + -1.10%) 0.1236em,calc(57.5% + -1.10%) 0.3498em,calc(77.7% + -1.10%) 0.3330em,calc(97.4% + -1.10%) 0.3017em}
-  50%{background-position:calc(15.6% + 1.40%) 0.2770em,calc(37.1% + 1.40%) 0.2236em,calc(57.5% + 1.40%) 0.4281em,calc(77.7% + 1.40%) 0.4183em,calc(97.4% + 1.40%) 0.3836em}
-  75%{background-position:calc(15.6% + -0.60%) 0.3807em,calc(37.1% + -0.60%) 0.3236em,calc(57.5% + -0.60%) 0.5064em,calc(77.7% + -0.60%) 0.5036em,calc(97.4% + -0.60%) 0.4656em}
-  100%{background-position:calc(15.6% + 0.00%) 0.4844em,calc(37.1% + 0.00%) 0.4236em,calc(57.5% + 0.00%) 0.5847em,calc(77.7% + 0.00%) 0.5889em,calc(97.4% + 0.00%) 0.5476em}}
-.r3{opacity:.50;background-repeat:repeat-y;
-  background-image:linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.05%,rgba(120,166,121,.92) 2.05% 4.87%,rgba(194,211,180,.90) 4.87% 10.26%,rgba(213,197,148,.88) 10.26% 14.62%,rgba(190,208,177,.90) 14.62% 20.77%,rgba(120,166,121,.92) 20.77% 23.59%,rgba(18,64,38,.96) 23.59% 25.64%,rgba(0,0,0,0) 25.64% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.05%,rgba(120,166,121,.92) 2.05% 4.87%,rgba(194,211,180,.90) 4.87% 10.26%,rgba(213,197,148,.88) 10.26% 14.62%,rgba(190,208,177,.90) 14.62% 20.77%,rgba(120,166,121,.92) 20.77% 23.59%,rgba(18,64,38,.96) 23.59% 25.64%,rgba(0,0,0,0) 25.64% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.05%,rgba(120,166,121,.92) 2.05% 4.87%,rgba(194,211,180,.90) 4.87% 10.26%,rgba(213,197,148,.88) 10.26% 14.61%,rgba(190,208,177,.90) 14.61% 20.77%,rgba(120,166,121,.92) 20.77% 23.59%,rgba(18,64,38,.96) 23.59% 25.64%,rgba(0,0,0,0) 25.64% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.05%,rgba(120,166,121,.92) 2.05% 4.87%,rgba(194,211,180,.90) 4.87% 10.26%,rgba(213,197,148,.88) 10.26% 14.62%,rgba(190,208,177,.90) 14.62% 20.77%,rgba(120,166,121,.92) 20.77% 23.59%,rgba(18,64,38,.96) 23.59% 25.64%,rgba(0,0,0,0) 25.64% 100%),linear-gradient(to bottom,rgba(18,64,38,.96) 0.00% 2.05%,rgba(120,166,121,.92) 2.05% 4.87%,rgba(194,211,180,.90) 4.87% 10.26%,rgba(213,197,148,.88) 10.26% 14.62%,rgba(190,208,177,.90) 14.62% 20.77%,rgba(120,166,121,.92) 20.77% 23.59%,rgba(18,64,38,.96) 23.59% 25.64%,rgba(0,0,0,0) 25.64% 100%);
-  background-size:0.301em 0.4932em,0.215em 0.3523em,0.271em 0.4441em,0.295em 0.4834em,0.277em 0.4539em;
+  0%{background-position:calc(15.6% + 0.00%) 0.0917em,calc(37.1% + 0.00%) 0.0312em,calc(57.5% + 0.00%) 0.3685em,calc(77.7% + 0.00%) 0.3329em,calc(97.4% + 0.00%) 0.2960em}
+  25%{background-position:calc(15.6% + -1.10%) 0.2282em,calc(37.1% + -1.10%) 0.1634em,calc(57.5% + -1.10%) 0.4747em,calc(77.7% + -1.10%) 0.4475em,calc(97.4% + -1.10%) 0.4065em}
+  50%{background-position:calc(15.6% + 1.40%) 0.3647em,calc(37.1% + 1.40%) 0.2956em,calc(57.5% + 1.40%) 0.5810em,calc(77.7% + 1.40%) 0.5621em,calc(97.4% + 1.40%) 0.5169em}
+  75%{background-position:calc(15.6% + -0.60%) 0.5012em,calc(37.1% + -0.60%) 0.4278em,calc(57.5% + -0.60%) 0.6872em,calc(77.7% + -0.60%) 0.6767em,calc(97.4% + -0.60%) 0.6274em}
+  100%{background-position:calc(15.6% + 0.00%) 0.6377em,calc(37.1% + 0.00%) 0.5600em,calc(57.5% + 0.00%) 0.7935em,calc(77.7% + 0.00%) 0.7914em,calc(97.4% + 0.00%) 0.7378em}}
+.r3{opacity:.48;background-repeat:repeat-y;
+  background-image:url(assets/bill-mini-r.webp),url(assets/bill-mini-l.webp),url(assets/bill-mini.webp),url(assets/bill-mini-r.webp),url(assets/bill-mini-l.webp);
+  background-size:0.347em auto,0.259em auto,0.301em auto,0.34em auto,0.323em auto;
   animation:fall-r3 7.1s linear -1.5s infinite}
 @keyframes fall-r3{
-  0%{background-position:calc(22.2% + 0.00%) 0.3398em,calc(44.8% + 0.00%) 0.1120em,calc(63.7% + 0.00%) 0.0808em,calc(84.5% + 0.00%) 0.1455em,calc(2.3% + 0.00%) 0.1847em}
-  25%{background-position:calc(22.2% + -1.10%) 0.4631em,calc(44.8% + -1.10%) 0.2001em,calc(63.7% + -1.10%) 0.1919em,calc(84.5% + -1.10%) 0.2664em,calc(2.3% + -1.10%) 0.2982em}
-  50%{background-position:calc(22.2% + 1.40%) 0.5864em,calc(44.8% + 1.40%) 0.2882em,calc(63.7% + 1.40%) 0.3029em,calc(84.5% + 1.40%) 0.3872em,calc(2.3% + 1.40%) 0.4117em}
-  75%{background-position:calc(22.2% + -0.60%) 0.7097em,calc(44.8% + -0.60%) 0.3763em,calc(63.7% + -0.60%) 0.4139em,calc(84.5% + -0.60%) 0.5081em,calc(2.3% + -0.60%) 0.5252em}
-  100%{background-position:calc(22.2% + 0.00%) 0.8330em,calc(44.8% + 0.00%) 0.4643em,calc(63.7% + 0.00%) 0.5249em,calc(84.5% + 0.00%) 0.6289em,calc(2.3% + 0.00%) 0.6386em}}
+  0%{background-position:calc(22.2% + 0.00%) 0.4000em,calc(44.8% + 0.00%) 0.1367em,calc(63.7% + 0.00%) 0.0959em,calc(84.5% + 0.00%) 0.1712em,calc(2.3% + 0.00%) 0.2182em}
+  25%{background-position:calc(22.2% + -1.10%) 0.5452em,calc(44.8% + -1.10%) 0.2442em,calc(63.7% + -1.10%) 0.2276em,calc(84.5% + -1.10%) 0.3135em,calc(2.3% + -1.10%) 0.3523em}
+  50%{background-position:calc(22.2% + 1.40%) 0.6903em,calc(44.8% + 1.40%) 0.3517em,calc(63.7% + 1.40%) 0.3593em,calc(84.5% + 1.40%) 0.4557em,calc(2.3% + 1.40%) 0.4863em}
+  75%{background-position:calc(22.2% + -0.60%) 0.8355em,calc(44.8% + -0.60%) 0.4592em,calc(63.7% + -0.60%) 0.4910em,calc(84.5% + -0.60%) 0.5979em,calc(2.3% + -0.60%) 0.6204em}
+  100%{background-position:calc(22.2% + 0.00%) 0.9806em,calc(44.8% + 0.00%) 0.5667em,calc(63.7% + 0.00%) 0.6227em,calc(84.5% + 0.00%) 0.7401em,calc(2.3% + 0.00%) 0.7544em}}
 @media (prefers-reduced-motion:reduce){.rain{display:none}}
 
 /* ---------- sections ---------- */
@@ -617,7 +611,7 @@ img{height:auto}
 .bill{position:relative;width:min(1180px,calc(100% - 32px));margin:28px auto}
 
 .bill-front{position:relative;border-radius:6px;overflow:hidden;
-  background:#10140E url(assets/bill-bg.webp) center/100% 100% no-repeat;
+  background:#10140E url(assets/bill-bg.webp) center/cover no-repeat;
   box-shadow:inset 0 0 0 1px #242B21,0 24px 48px -18px rgba(0,0,0,.95)}
 /* the engraved double frame */
 .bill-front::before,.bill-front::after{content:"";position:absolute;pointer-events:none;z-index:1}
@@ -645,7 +639,7 @@ img{height:auto}
 .bill-shade{background:#050604}
 /* the back of the bill, folded over the front when a corner peels */
 .bill-flapwrap{position:absolute;inset:0;z-index:4;pointer-events:none;visibility:hidden}
-.bill-flap{position:absolute;inset:0;background:#1B2418 url(assets/bill-back.webp) center/100% 100% no-repeat}
+.bill-flap{position:absolute;inset:0;background:#1B2418 url(assets/bill-back.webp) center/cover no-repeat}
 .bill-flapshade{position:absolute;inset:0}
 
 /* ---- content inside a bill ---- */
@@ -757,3 +751,13 @@ html.stack-on .bill-shade{will-change:opacity}
 html.stack-on .bill-shine{background-size:100% 100%;left:-100%;right:auto;width:300%;
   background:linear-gradient(105deg,rgba(240,180,65,0) 40%,rgba(240,180,65,.16) 50%,rgba(240,180,65,0) 60%);
   will-change:transform,opacity}
+
+/* ---- phones: the note stands upright ----
+   A landscape banknote forced into a tall phone card gets squashed. On
+   phones the texture is the same engraving turned 90 degrees, like a bill
+   held vertically, and it's sized to cover rather than stretch, so the
+   rosettes and portrait oval stay round on every screen. */
+@media (max-width:699px){
+  .bill-front{background-image:url(assets/bill-bg-tall.webp)}
+  .bill-flap{background-image:url(assets/bill-back-tall.webp)}
+}
