@@ -164,6 +164,12 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     btn.addEventListener('click', function () {
       if (card.classList.contains('playing')) return;
       var id = card.dataset.yt;
+      // On a phone the tile is thumbnail-sized; hand off to the YouTube app,
+      // which plays full screen, instead of a tiny player inside the bill.
+      if (matchMedia('(max-width: 699px)').matches) {
+        window.open('https://youtu.be/' + id, '_blank', 'noopener');
+        return;
+      }
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + id +
         '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
