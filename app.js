@@ -523,10 +523,17 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
   if (!stage || bills.length < 2) return;
 
   var root = document.documentElement;
-  var PER = 360;                                   // px of scroll per bill
+  // px of scroll per bill. Phones get a longer runway: a thumb flick
+  // carries far more distance than a wheel notch, so 360 there blew
+  // through three bills in one swipe.
+  var PER = 360;
+  function perBill() { return window.innerWidth < 700 ? 560 : 360; }
+  var EASE_K = 0.28;                               // how fast the stack catches up to the scroll
   var JIT = [0, -0.9, 1.1, -0.7, 0.8, -0.5, 0.6, -0.8];
   var reduce = matchMedia('(prefers-reduced-motion: reduce)');
-  var on = false, start = 0, W = 0, H = 0, ticking = false, top = -1, lastZone = null;
+  var on = false, start = 0, W = 0, H = 0, raf = 0, top = -1, lastZone = null;
+  var cur = 0;                                     // the eased position the bills are drawn at
+  var lastVW = window.innerWidth, lastVH = window.innerHeight;
 
   var parts = bills.map(function (b) {
     return {
@@ -568,14 +575,25 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     var L = Math.abs(W * sn) + Math.abs(H * cs);
     function at(x, y) { return (((x - W / 2) * sn - (y - H / 2) * cs) / L + 0.5) * 100; }
     var t0 = at(mx, my), t1 = at(cx, cy);
-    function stop(f) { return (t0 + (t1 - t0) * f).toFixed(2) + '%'; }
-    function pt(x, y) { return x.toFixed(1) + 'px ' + y.toFixed(1) + 'px'; }
+    // Rounded hard: a brand-new gradient string every frame makes the
+    // browser re-rasterise the fold shading, which was the single most
+    // expensive thing on the phone. Stepping the angle and the stops
+    // keeps the look and lets put() skip most of the writes.
+    var deg = (Math.round(th * 180 / Math.PI / 4) * 4).toFixed(0);
+    // The fold angle only depends on the bill's proportions, so it never
+    // changes mid-flip — only the stops travel. On phones even that costs
+    // more than it's worth, so the shading is left to a fixed rule in the
+    // stylesheet and nothing is rewritten per frame.
+    var lite = W < 700;
+    function stop(f) { return (Math.round((t0 + (t1 - t0) * f) / 5) * 5) + '%'; }
+    function pt(x, y) { return x.toFixed(0) + 'px ' + y.toFixed(0) + 'px'; }
     return {
       front: 'polygon(0px 0px, ' + pt(W, 0) + ', ' + pt(p2x, p2y) + ', ' + pt(p1x, p1y) + ', ' + pt(0, H) + ')',
       flap:  'polygon(' + pt(p1x, p1y) + ', ' + pt(p2x, p2y) + ', ' + pt(cx, cy) + ')',
-      shade: 'linear-gradient(' + (th * 180 / Math.PI).toFixed(2) + 'deg, rgba(0,0,0,.62) ' + stop(0) +
-             ', rgba(255,255,255,.09) ' + stop(0.28) + ', rgba(0,0,0,.04) ' + stop(0.7) +
-             ', rgba(0,0,0,.38) ' + stop(1) + ')'
+      shade: lite ? null
+        : 'linear-gradient(' + deg + 'deg, rgba(0,0,0,.62) ' + stop(0) +
+          ', rgba(255,255,255,.09) ' + stop(0.28) + ', rgba(0,0,0,.04) ' + stop(0.7) +
+          ', rgba(0,0,0,.38) ' + stop(1) + ')'
     };
   }
 
@@ -587,10 +605,7 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     v.classList.remove('playing');
   }
 
-  function frame() {
-    ticking = false;
-    if (!on) return;
-    var t = (window.scrollY - start) / PER;
+  function draw(t) {
     var n = parts.length, f = [], F = 0, i;
     var zone = t < -3 ? -1 : t > n + 2 ? 1 : 0;
     if (zone !== 0 && zone === lastZone) return;
@@ -637,14 +652,32 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
       put(P, 'fw', P.wrap, 'visibility', g ? 'visible' : 'hidden');
       if (g) {
         put(P, 'fl', P.flap, 'clipPath', g.flap);
-        put(P, 'fs', P.fshade, 'background', g.shade);
+        if (g.shade) put(P, 'fs', P.fshade, 'background', g.shade);
       }
     }
     top = newTop;
   }
 
+  /* The stack eases toward the scroll position instead of being pinned
+     to it. On a phone a momentum flick can move 1200px between two
+     frames; drawn raw that lands as a jump, and the fold looks like it
+     skipped. Catching up by a fraction each frame turns the same flick
+     into a flip you can follow. Big jumps — an anchor link, a restored
+     hash — snap instead of sliding all the way there. */
+  function tick() {
+    raf = 0;
+    if (!on) return;
+    var target = (window.scrollY - start) / PER, d = target - cur;
+    if (Math.abs(d) > 2.5 || Math.abs(d) < 0.0015) cur = target;
+    else cur += d * EASE_K;
+    draw(cur);
+    if (cur !== target) raf = requestAnimationFrame(tick);
+  }
+
+  function frame() { cur = (window.scrollY - start) / PER; draw(cur); }
+
   function onScroll() {
-    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+    if (!raf) raf = requestAnimationFrame(tick);
   }
 
   // Fit each bill's contents to its card. The phone layouts already fit a
@@ -688,9 +721,13 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     var nav = document.querySelector('.nav'), player = document.getElementById('player');
     root.style.setProperty('--nav-h', (nav ? nav.offsetHeight : 64) + 'px');
     root.style.setProperty('--player-h', (player && !player.hidden ? player.offsetHeight : 0) + 'px');
-    parts.forEach(function (P) { P.memo = {}; P.el.style.display = ''; });
+    parts.forEach(function (P) {
+      P.memo = {}; P.el.style.display = '';
+      P.fshade.style.background = '';   // phone/desktop swap must not leave a stale fold
+    });
     lastZone = null;
     W = bills[0].offsetWidth; H = bills[0].offsetHeight;
+    PER = perBill();
     fit();
     stack.style.height = (stage.offsetHeight + (bills.length - 1) * PER) + 'px';
     var navH = nav ? nav.offsetHeight : 64;
@@ -721,8 +758,20 @@ var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyGuUeAZTs9mt1sGX_2qr_QV
     if (i >= 0 && i !== top) window.scrollTo({ top: spot(i) });
   });
 
+  /* Mobile browsers fire resize every time the address bar slides away,
+     which used to re-run the whole layout mid-scroll — the stack jumped
+     and the page stuttered. The bills are sized in svh, so that change
+     doesn't affect them: only a width change or a real rotation needs a
+     relayout. */
   var rt;
-  function onResize() { clearTimeout(rt); rt = setTimeout(layout, 120); }
+  function onResize() {
+    var widthChanged = window.innerWidth !== lastVW;
+    var heightJump = Math.abs(window.innerHeight - lastVH);
+    lastVH = window.innerHeight;
+    if (!widthChanged && heightJump < 160) return;
+    lastVW = window.innerWidth;
+    clearTimeout(rt); rt = setTimeout(layout, 120);
+  }
 
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', onResize);
