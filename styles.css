@@ -807,3 +807,13 @@ html.stack-on .bill-shine{background-size:100% 100%;left:-100%;right:auto;width:
 
 /* keep keyboard focus / anchor scrolls clear of the fixed player bar */
 html{scroll-padding-bottom:calc(var(--player-h) + 12px)}
+
+
+/* Phones: the fold's shading is a fixed gradient instead of one rebuilt
+   on every frame. The fold angle never changes mid-flip anyway, and
+   rebuilding it was the most expensive thing in the whole flip. */
+@media (max-width:699px){
+  .bill-flapshade{background:linear-gradient(-116deg,
+    rgba(0,0,0,.62) 12%, rgba(255,255,255,.07) 36%,
+    rgba(0,0,0,.06) 64%, rgba(0,0,0,.42) 90%)}
+}
