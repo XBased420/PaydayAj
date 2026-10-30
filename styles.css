@@ -827,11 +827,12 @@ html{scroll-padding-bottom:calc(var(--player-h) + 12px)}
 @keyframes aj-sweep{to{transform:rotate(360deg)}}
 .ajsweep{transform-origin:50% 50%;animation:aj-sweep 9s linear infinite}
 
-/* Phones: the seals on the bills hold still. At 42px the arc barely
-   reads, and three of them turning during a flip is work the phone
-   should be spending on the flip itself. The nav mark still moves. */
+/* Phones: the seal turns here too. Measured during a flip it costs
+   nothing — it's a transform on a tiny layer — so the only change the
+   small size needs is a slightly heavier arc, or the glint is too fine
+   to see at 42px. */
 @media (max-width:699px){
-  .bill-seal .ajsweep{animation:none}
+  .bill-seal .ajsweep circle{stroke-width:4.8}
 }
 @media (prefers-reduced-motion:reduce){
   .ajsweep{animation:none}
