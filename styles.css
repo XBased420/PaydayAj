@@ -53,8 +53,7 @@ a{color:inherit}
 .nav .wrap{display:flex;align-items:center;gap:26px;height:64px}
 .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);
   font-size:15px;letter-spacing:.02em;text-decoration:none;margin-right:auto}
-.brand img{width:30px;height:30px;border-radius:50%;object-fit:cover;
-  border:1.5px solid var(--gold)}
+.brand .ajmark{width:30px;height:30px;flex:0 0 auto}
 .navlinks{display:flex;gap:24px;font-size:12.5px;letter-spacing:.05em;
   text-transform:uppercase;font-weight:600}
 .navlinks a{color:var(--muted);text-decoration:none;transition:color .18s}
@@ -625,11 +624,9 @@ img{height:auto}
   font-size:12px;letter-spacing:.14em;color:var(--green);pointer-events:none}
 .bill-motto{position:absolute;z-index:1;left:38px;bottom:34px;font-family:var(--mono);
   font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);pointer-events:none}
-.bill-seal{position:absolute;z-index:1;right:34px;top:26px;width:64px;height:64px;border-radius:50%;
-  box-sizing:border-box;border:2px solid rgba(39,162,78,.6);
-  box-shadow:inset 0 0 0 4px #10140E,inset 0 0 0 5px rgba(39,162,78,.45);
-  display:grid;place-items:center;font-family:var(--display);font-size:14px;color:var(--green);
-  background:#10140E;pointer-events:none}
+.bill-seal{position:absolute;z-index:1;right:34px;top:26px;width:64px;height:64px;
+  display:block;pointer-events:none}
+.bill-seal .ajmark{width:100%;height:100%;display:block}
 
 .bill-body{position:relative;z-index:2;box-sizing:border-box;padding:84px 72px 68px;
   display:flex;flex-direction:column;gap:24px}
@@ -694,8 +691,7 @@ html.stack-on .bill-about .photostack{height:100%}
   .bill-100.br{right:22px;bottom:18px}
   .bill-serial{font-size:9.5px;right:70px;top:27px;letter-spacing:.1em}
   .bill-motto{font-size:8.5px;left:22px;bottom:20px;letter-spacing:.14em}
-  .bill-seal{width:42px;height:42px;right:20px;top:16px;font-size:10px;
-    box-shadow:inset 0 0 0 3px #10140E,inset 0 0 0 4px rgba(39,162,78,.45)}
+  .bill-seal{width:42px;height:42px;right:20px;top:16px}
   .bill-body{padding:62px 20px 44px;gap:16px}
   .bill-head{flex-direction:column;align-items:flex-start;gap:12px}
   .bill-head h2,.bill-about h2{font-size:27px}
@@ -816,4 +812,27 @@ html{scroll-padding-bottom:calc(var(--player-h) + 12px)}
   .bill-flapshade{background:linear-gradient(-116deg,
     rgba(0,0,0,.62) 12%, rgba(255,255,255,.07) 36%,
     rgba(0,0,0,.06) 64%, rgba(0,0,0,.42) 90%)}
+}
+
+
+/* ================================================================
+   The AJ mark
+   One stamp, two homes: the nav brand and the seal on every bill.
+   A gold arc drifts round the ring once every nine seconds — slow
+   enough to read as a glint rather than a spinner.
+   ================================================================ */
+.ajdefs{position:absolute;width:0;height:0;overflow:hidden}
+.ajmark{display:block;overflow:visible}
+.ajmark text{font-family:var(--display);font-weight:400}
+@keyframes aj-sweep{to{transform:rotate(360deg)}}
+.ajsweep{transform-origin:50% 50%;animation:aj-sweep 9s linear infinite}
+
+/* Phones: the seals on the bills hold still. At 42px the arc barely
+   reads, and three of them turning during a flip is work the phone
+   should be spending on the flip itself. The nav mark still moves. */
+@media (max-width:699px){
+  .bill-seal .ajsweep{animation:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .ajsweep{animation:none}
 }
